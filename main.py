@@ -35,8 +35,8 @@ if __name__ == '__main__':
     device = torch.device('cuda:{}'.format(args.gpus) if args.gpus != '-1' else 'cpu')
     model = Model(args).to(device)
 
-    for name, value in model.named_parameters():
-        print(name)
+    # for name, value in model.named_parameters():
+    #     print(name)
     approximator_param = list(map(id, model.approximator.parameters()))
     approximator_param += list(map(id, model.conv1d_approximator.parameters()))
     base_param = filter(lambda p: id(p) not in approximator_param, model.parameters())
