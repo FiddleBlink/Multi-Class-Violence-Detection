@@ -5,11 +5,11 @@ import cv2
 clip_len = 16
 
 # the dir of testing images
-video_root = 'xx/TestClips/Videos'   ## the path of test videos
+video_root = 'Features/TestClips/Videos'   ## the path of test videos
 feature_list = 'rgb_test.list'
 # the ground truth txt
 
-gt_txt = 'xx/annotations.txt'     ## the path of test annotations
+gt_txt = 'Features/annotations.txt'     ## the path of test annotations
 gt_lines = list(open(gt_txt))
 gt = []
 lists = list(open(feature_list))

@@ -1,20 +1,28 @@
 import torch
 
 
+# def CLAS(logits, label, seq_len, criterion, device, is_topk=True):
+#     logits = logits.squeeze()
+#     instance_logits = torch.zeros(0).to(device)  # tensor([])
+#     for i in range(logits.shape[0]):
+#         if is_topk:
+#             tmp, _ = torch.topk(logits[i][:seq_len[i]], k=int(seq_len[i]//16+1), largest=True)
+#             tmp = torch.mean(tmp).view(1)
+#         else:
+#             tmp = torch.mean(logits[i, :seq_len[i]]).view(1)
+#         instance_logits = torch.cat((instance_logits, tmp))
+
+#     instance_logits = torch.sigmoid(instance_logits)
+
+#     clsloss = criterion(instance_logits, label)
+#     return clsloss
+
 def CLAS(logits, label, seq_len, criterion, device, is_topk=True):
-    logits = logits.squeeze()
-    instance_logits = torch.zeros(0).to(device)  # tensor([])
-    for i in range(logits.shape[0]):
-        if is_topk:
-            tmp, _ = torch.topk(logits[i][:seq_len[i]], k=int(seq_len[i]//16+1), largest=True)
-            tmp = torch.mean(tmp).view(1)
-        else:
-            tmp = torch.mean(logits[i, :seq_len[i]]).view(1)
-        instance_logits = torch.cat((instance_logits, tmp))
-
-    instance_logits = torch.sigmoid(instance_logits)
-
-    clsloss = criterion(instance_logits, label)
+    seq_len = torch.tensor(seq_len).to(device)
+    logits = logits.view(-1, logits.shape[-1])  # Reshape to [x*y, n_classes]
+    labels = label.repeat_interleave(seq_len, dim=0)  # Repeat labels for each time step
+    
+    clsloss = criterion(logits, labels)
     return clsloss
 
 
@@ -33,10 +41,13 @@ def train(dataloader, model, optimizer, criterion, device, is_topk):
     with torch.set_grad_enabled(True):
         model.train()
         for i, (input, label) in enumerate(dataloader):
+            print(input.shape)
             seq_len = torch.sum(torch.max(torch.abs(input), dim=2)[0]>0, 1)
             input = input[:, :torch.max(seq_len), :]
             input, label = input.float().to(device), label.float().to(device)
             logits, logits2 = model(input, seq_len)
+            print(logits.shape)
+
             clsloss = CLAS(logits, label, seq_len, criterion, device, is_topk)
             clsloss2 = CLAS(logits2, label, seq_len, criterion, device, is_topk)
             croloss = CENTROPY(logits, logits2, seq_len, device)

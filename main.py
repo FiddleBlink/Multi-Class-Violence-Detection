@@ -49,12 +49,12 @@ if __name__ == '__main__':
                             ],
                             lr=args.lr, weight_decay=0.000)
     scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[10], gamma=0.1)
-    criterion = torch.nn.BCELoss()
+    criterion = torch.nn.CrossEntropyLoss()
 
     is_topk = True
     gt = np.load(args.gt)
-    pr_auc, pr_auc_online, f1, precision1, recall1, accuracy = test(test_loader, model, device, gt)
-    print('Random initalization: offline pr_auc:{0:.4}; online pr_auc:{1:.4}\n'.format(pr_auc, pr_auc_online))
+    # pr_auc, pr_auc_online, f1, precision1, recall1, accuracy = test(test_loader, model, device, gt)
+    # print('Random initalization: offline pr_auc:{0:.4}; online pr_auc:{1:.4}\n'.format(pr_auc, pr_auc_online))
     for epoch in range(args.max_epoch):
         print(f'==========================EPOCH: {epoch}=====================================')
         scheduler.step()
@@ -63,6 +63,6 @@ if __name__ == '__main__':
         if epoch % 2 == 0 and not epoch == 0:
             torch.save(model.state_dict(), './ckpt/'+args.model_name+'{}.pkl'.format(epoch))
 
-        pr_auc, pr_auc_online, f1, precision1, recall1, accuracy = test(test_loader, model, device, gt)
-        print('Epoch {0}/{1}: offline pr_auc:{2:.4}; online pr_auc:{3:.4}\n'.format(epoch, args.max_epoch, pr_auc, pr_auc_online))
+        # pr_auc, pr_auc_online, f1, precision1, recall1, accuracy = test(test_loader, model, device, gt)
+        # print('Epoch {0}/{1}: offline pr_auc:{2:.4}; online pr_auc:{3:.4}\n'.format(epoch, args.max_epoch, pr_auc, pr_auc_online))
     torch.save(model.state_dict(), './ckpt/' + args.model_name + '.pkl')
