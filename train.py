@@ -6,7 +6,12 @@ def CLAS(logits, label, seq_len, criterion, device, is_topk=True):
     instance_logits = torch.zeros(7).to(device)  # tensor([])
     outx = []
     for i in range(logits.shape[0]):
-        tmp = torch.mean(logits[i][:seq_len[i]], dim=0)
+        if is_topk:
+            k = int(seq_len[i] // 16 + 1)  # Calculate k 
+            tmp, _ = torch.topk(logits[i][:seq_len[i]], k=k, dim=0, largest=True) 
+            tmp = torch.mean(tmp, dim=0)  # Average across the top-k frames
+        else:
+            tmp = torch.mean(logits[i][:seq_len[i]], dim=0)
         outx.append(tmp)
     instance_logits = torch.stack(outx)
 
@@ -72,7 +77,7 @@ def train(dataloader, model, optimizer, criterion, device, is_topk):
 
             # print('\n',clsloss)
             # print(clsloss2)
-            print(f'Total Loss: {total_loss} \n')
+            print(f'Epoch: {i}, Loss: {total_loss}')
 
             optimizer.zero_grad()
             total_loss.backward()
