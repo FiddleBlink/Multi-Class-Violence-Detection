@@ -13,39 +13,6 @@ def weight_init(m):
         # m.bias.data.fill_(0.1)
 
 class Model(nn.Module):
-    """
-    A PyTorch module representing the model.
-
-    Args:
-        args (Namespace): The arguments containing the configuration.
-
-    Attributes:
-        conv1d1 (nn.Conv1d): The first 1D convolutional layer.
-        conv1d2 (nn.Conv1d): The second 1D convolutional layer.
-        conv1d3 (nn.Conv1d): The third 1D convolutional layer.
-        conv1d4 (nn.Conv1d): The fourth 1D convolutional layer.
-        gc1 (GraphConvolution): The first graph convolutional layer.
-        gc2 (GraphConvolution): The second graph convolutional layer.
-        gc3 (GraphConvolution): The third graph convolutional layer.
-        gc4 (GraphConvolution): The fourth graph convolutional layer.
-        gc5 (GraphConvolution): The fifth graph convolutional layer.
-        gc6 (GraphConvolution): The sixth graph convolutional layer.
-        simAdj (SimilarityAdj): The similarity adjacency layer.
-        disAdj (DistanceAdj): The distance adjacency layer.
-        classifier (nn.Linear): The linear classifier layer.
-        approximator (nn.Sequential): The sequential approximator layer.
-        conv1d_approximator (nn.Conv1d): The 1D convolutional approximator layer.
-        dropout (nn.Dropout): The dropout layer.
-        relu (nn.ReLU): The ReLU activation function.
-        tanh (nn.Tanh): The Tanh activation function.
-        sigmoid (nn.Sigmoid): The Sigmoid activation function.
-
-    Methods:
-        forward(inputs, seq_len): Performs forward pass through the model.
-        sadj(logits, seq_len): Computes the similarity adjacency matrix.
-        adj(x, seq_len): Computes the adjacency matrix.
-    """
-
     def __init__(self, args):
         super(Model, self).__init__()
 
@@ -77,17 +44,6 @@ class Model(nn.Module):
         self.apply(weight_init)
 
     def forward(self, inputs, seq_len):
-        """
-        Performs forward pass through the model.
-
-        Args:
-            inputs (torch.Tensor): The input tensor.
-            seq_len (list or None): The sequence lengths.
-
-        Returns:
-            torch.Tensor: The output tensor.
-            torch.Tensor: The logits tensor.
-        """
         x = inputs.permute(0, 2, 1)  # for conv1d
         x = self.relu(self.conv1d1(x))
         x = self.dropout(x)
@@ -103,36 +59,30 @@ class Model(nn.Module):
 
 
         ## gcn
-        scoadj = self.sadj(logits.detach(), seq_len)
         adj = self.adj(inputs, seq_len)
         disadj = self.disAdj(x.shape[0], x.shape[1])
+        scoadj = self.sadj(logits.detach(), seq_len)
+
         x1_h = self.relu(self.gc1(x, adj))
         x1_h = self.dropout(x1_h)
-        x2_h = self.relu(self.gc3(x, disadj))
-        x2_h = self.dropout(x2_h)
-        x3_h = self.relu(self.gc5(x, scoadj))
-        x3_h = self.dropout(x3_h)
         x1 = self.relu(self.gc2(x1_h, adj))
         x1 = self.dropout(x1)
+
+        x2_h = self.relu(self.gc3(x, disadj))
+        x2_h = self.dropout(x2_h)
         x2 = self.relu(self.gc4(x2_h, disadj))
         x2 = self.dropout(x2)
+        
+        x3_h = self.relu(self.gc5(x, scoadj))
+        x3_h = self.dropout(x3_h)
         x3 = self.relu(self.gc6(x3_h, scoadj))
         x3 = self.dropout(x3)
+
         x = torch.cat((x1, x2, x3), 2)
         x = self.classifier(x)
         return x, logits
 
     def sadj(self, logits, seq_len):
-        """
-        Computes the similarity adjacency matrix.
-
-        Args:
-            logits (torch.Tensor): The logits tensor.
-            seq_len (list or None): The sequence lengths.
-
-        Returns:
-            torch.Tensor: The similarity adjacency matrix.
-        """
         lens = logits.shape[1]
         soft = nn.Softmax(1)
         logits2 = self.sigmoid(logits).repeat(1, 1, lens)
@@ -154,16 +104,6 @@ class Model(nn.Module):
         return output
 
     def adj(self, x, seq_len):
-        """
-        Computes the adjacency matrix.
-
-        Args:
-            x (torch.Tensor): The input tensor.
-            seq_len (list or None): The sequence lengths.
-
-        Returns:
-            torch.Tensor: The adjacency matrix.
-        """
         soft = nn.Softmax(1)
         x2 = x.matmul(x.permute(0,2,1)) # B*T*T
         x_norm = torch.norm(x, p=2, dim=2, keepdim=True)  # B*T*1

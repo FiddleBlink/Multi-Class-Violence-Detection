@@ -51,12 +51,13 @@ if __name__ == '__main__':
     scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[10], gamma=0.1)
     criterion = torch.nn.CrossEntropyLoss()
 
-    is_topk = True
+    is_topk = False
     gt = np.load(args.gt)
     # pr_auc, pr_auc_online, f1, precision1, recall1, accuracy = test(test_loader, model, device, gt)
     # print('Random initalization: offline pr_auc:{0:.4}; online pr_auc:{1:.4}\n'.format(pr_auc, pr_auc_online))
     for epoch in range(args.max_epoch):
-        print(f'==========================EPOCH: {epoch}=====================================')
+        print(f'=====[INFO] EPOCH No.{epoch + 1} under Processing=====\n')
+        
         scheduler.step()
         st = time.time()
         train(train_loader, model, optimizer, criterion, device, is_topk)
