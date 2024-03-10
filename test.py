@@ -11,7 +11,7 @@ def test(dataloader, model, device, gt):
             input = input.to(device)
             logits, logits2 = model(inputs=input, seq_len=None)
             logits = torch.squeeze(logits)
-            sig = torch.sigmoid(logits)
+            sig = torch.softmax(logits, 0)
             sig = torch.mean(sig, 0)
             pred = torch.cat((pred, sig))
             '''
@@ -24,8 +24,10 @@ def test(dataloader, model, device, gt):
             sig2 = torch.unsqueeze(sig2, 1) ##for audio
             pred2 = torch.cat((pred2, sig2))
 
+        print(f'pred: {pred.shape}')
         pred = list(pred.cpu().detach().numpy())
         pred2 = list(pred2.cpu().detach().numpy())
+
 
         precision, recall, th = precision_recall_curve(list(gt), np.repeat(pred, 16))
         pr_auc = auc(recall, precision)

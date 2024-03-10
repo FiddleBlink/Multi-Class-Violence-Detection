@@ -5,8 +5,8 @@ import cv2
 clip_len = 16
 
 # the dir of testing images
-video_root = 'Features/TestClips/Videos'   ## the path of test videos
-feature_list = 'rgb_test.list'
+video_root = 'Features/Videos'   ## the path of test videos
+feature_list = 'list/rgb_test.list'
 # the ground truth txt
 
 gt_txt = 'Features/annotations.txt'     ## the path of test annotations
