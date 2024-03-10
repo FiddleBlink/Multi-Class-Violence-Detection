@@ -21,7 +21,7 @@ if __name__ == '__main__':
     model = Model(args)
     model = model.to(device)
     model_dict = model.load_state_dict(
-        {k.replace('module.', ''): v for k, v in torch.load('ckpt/wsanodet_mix2.pkl').items()})
+        {k.replace('module.', ''): v for k, v in torch.load('ckpt/wsanodet.pkl').items()})
     
     model.eval()
     with torch.no_grad():
@@ -31,12 +31,10 @@ if __name__ == '__main__':
             input = input.to(device)
             logits, logits2 = model(inputs=input, seq_len=None)
             
+            probs = torch.softmax(logits, 2)
+            probs = torch.mean(probs, dim=0)  # Fix: Replace 0 with dim=0
+            pred = torch.argmax(probs, 1).float()
 
-            print(logits.shape)
-            logits = torch.squeeze(logits)
-            sig = torch.sigmoid(logits)
-            sig = torch.mean(sig, 0)
-            pred = torch.cat((pred, sig))
             probabilities = list(pred.cpu().detach().numpy())
             probabilities = [round(num, 3) for num in probabilities]
             print(probabilities)

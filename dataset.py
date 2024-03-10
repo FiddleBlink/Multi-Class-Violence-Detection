@@ -53,14 +53,14 @@ class Dataset(data.Dataset):
             "B5": 5.0,
             "B6": 6.0,
         }
-
-        if self.normal_flag in self.list[index]:
-            label = 0.0
-        else:
-            if self.list[index].split('_label_')[1].split('-')[0] in labelencoding:
-                label = labelencoding[self.list[index].split('_label_')[1].split('-')[0]]
-            else:
+        if not self.test_mode:
+            if self.normal_flag in self.list[index]:
                 label = 0.0
+            else:
+                if self.list[index].split('_label_')[1].split('-')[0] in labelencoding:
+                    label = labelencoding[self.list[index].split('_label_')[1].split('-')[0]]
+                else:
+                    label = 0.0
 
         if self.modality == 'AUDIO':
             features = np.array(np.load(self.list[index].strip('\n')), dtype=np.float32)

@@ -1,52 +1,39 @@
-from sklearn.metrics import auc, precision_recall_curve, f1_score, precision_score, recall_score, confusion_matrix, accuracy_score
+from sklearn.metrics import roc_auc_score, f1_score, precision_score, recall_score, confusion_matrix, accuracy_score
 import numpy as np
 import torch
 
 def test(dataloader, model, device, gt):
     with torch.no_grad():
         model.eval()
-        pred = torch.zeros(0).to(device)
-        pred2 = torch.zeros(0).to(device)
+        all_preds = []
+        all_probs = np.zeros((0, 7))
         for i, input in enumerate(dataloader):
             input = input.to(device)
             logits, logits2 = model(inputs=input, seq_len=None)
-            logits = torch.squeeze(logits)
-            sig = torch.softmax(logits, 0)
-            sig = torch.mean(sig, 0)
-            pred = torch.cat((pred, sig))
-            '''
-            online detection
-            '''
-            logits2 = torch.squeeze(logits2)
-            sig2 = torch.sigmoid(logits2)
-            sig2 = torch.mean(sig2, 0)
+            probs = torch.softmax(logits, 2)
+            probs = torch.mean(probs, dim=0)  # Fix: Replace 0 with dim=0
+            pred = torch.argmax(probs, 1).float()
+            all_preds.extend(pred.cpu().numpy())
+            all_probs = np.concatenate((all_probs, probs.view(-1, probs.size(-1)).cpu().numpy()))
 
-            sig2 = torch.unsqueeze(sig2, 1) ##for audio
-            pred2 = torch.cat((pred2, sig2))
-
-        print(f'pred: {pred.shape}')
-        pred = list(pred.cpu().detach().numpy())
-        pred2 = list(pred2.cpu().detach().numpy())
+        all_preds = np.array(all_preds)
+        print(f'pred: {all_preds.shape}')
+        print(f'pred: {all_preds[:100]}')
 
 
-        precision, recall, th = precision_recall_curve(list(gt), np.repeat(pred, 16))
-        pr_auc = auc(recall, precision)
-        precision, recall, th = precision_recall_curve(list(gt), np.repeat(pred2, 16))
-        pr_auc2 = auc(recall, precision)
-        
-        
-        pred = [(p > 0.75).astype(int) for p in pred]
-        f1 = f1_score(list(gt), np.repeat(pred, 16))
+        # pred: 145649
+        # GT: 2330384
 
-        precision1 = precision_score(list(gt), np.repeat(pred, 16))
-        recall1 = recall_score(list(gt), np.repeat(pred, 16))
+        roc_auc = roc_auc_score(list(gt), np.repeat(all_probs, 16, axis=0), multi_class='ovr', average='weighted')
+        f1 = f1_score(list(gt), np.repeat(all_preds, 16), average='weighted')
+        prec = precision_score(list(gt), np.repeat(all_preds, 16), average='weighted')
+        recal = recall_score(list(gt), np.repeat(all_preds, 16), average='weighted')
+        acc = accuracy_score(list(gt), np.repeat(all_preds, 16))
 
-        matrix = confusion_matrix(list(gt), np.repeat(pred, 16))
-        matrix = np.flip(matrix)
+        print(f'ROC AUC: {roc_auc}')
+        print(f'F1: {f1}')
+        print(f'Precision: {prec}')
+        print(f'Recall: {recal}')
+        print(f'Accuracy: {acc}')
 
-        accuracy = accuracy_score(list(gt), np.repeat(pred, 16))
-
-        return pr_auc, pr_auc2, f1, precision1, recall1, accuracy
-
-
-
+        return roc_auc, f1, prec, recal, acc
