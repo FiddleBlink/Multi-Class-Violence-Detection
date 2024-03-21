@@ -50,20 +50,49 @@ if __name__ == '__main__':
                             lr=args.lr, weight_decay=0.000)
     scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[10], gamma=0.1)
     criterion = torch.nn.CrossEntropyLoss()
+    criterion2 = torch.nn.BCELoss()
 
     is_topk = True
     gt = np.load(args.gt)
+
+    latestepoch = 0
+    # if os.path.exists('./ckpt/'+args.model_name+'{}.pkl'.format(latestepoch)):
+    #     model.load_state_dict(torch.load('./ckpt/' + args.model_name + '{}.pkl'.format(latestepoch)))
+
     # pr_auc, pr_auc_online, f1, precision1, recall1, accuracy = test(test_loader, model, device, gt)
     # print('Random initalization: offline pr_auc:{0:.4}; online pr_auc:{1:.4}\n'.format(pr_auc, pr_auc_online))
-    for epoch in range(args.max_epoch):
-        print(f'=====[INFO] EPOCH No.{epoch + 1} under Processing=====\n')
+    
+    train_losses = []
+    accuracy_arr = []
+    f1_arr = []
+    precision_arr = []
+    recall_arr = []
+    roc_auc_arr = []
+    
+    for epoch in range(args.max_epoch - latestepoch):
+        print(f'[INFO] EPOCH No.{epoch + 1 + latestepoch} under Processing=====\n\n')
         
         scheduler.step()
         st = time.time()
-        train(train_loader, model, optimizer, criterion, device, is_topk)
+        loss = train(train_loader, model, optimizer, criterion, criterion2, device, is_topk)
+        train_losses.append(loss)
+        
         if epoch % 2 == 0 and not epoch == 0:
             torch.save(model.state_dict(), './ckpt/'+args.model_name+'{}.pkl'.format(epoch))
 
-        # pr_auc, pr_auc_online, f1, precision1, recall1, accuracy = test(test_loader, model, device, gt)
-        # print('Epoch {0}/{1}: offline pr_auc:{2:.4}; online pr_auc:{3:.4}\n'.format(epoch, args.max_epoch, pr_auc, pr_auc_online))
+        roc_auc, f1, precision1, recall1, accuracy = test(test_loader, model, device, gt)
+        # print('Epoch {0}/{1}: offline roc_auc:{2:.4}'.format(epoch, args.max_epoch, roc_auc))
+        accuracy_arr.append(accuracy)
+        f1_arr.append(f1)
+        precision_arr.append(precision1)
+        recall_arr.append(recall1)
+        roc_auc_arr.append(roc_auc)
+
+    np.save('./ckpt/train_losses.npy'.format(epoch), np.array(train_losses))
+    np.save('./ckpt/roc_auc.npy'.format(epoch), np.array(roc_auc_arr))
+    np.save('./ckpt/f1.npy'.format(epoch), np.array(f1_arr))
+    np.save('./ckpt/precision.npy'.format(epoch), np.array(precision_arr))
+    np.save('./ckpt/recall.npy'.format(epoch), np.array(recall_arr))
+    np.save('./ckpt/accuracy.npy'.format(epoch), np.array(accuracy_arr))
+
     torch.save(model.state_dict(), './ckpt/' + args.model_name + '.pkl')

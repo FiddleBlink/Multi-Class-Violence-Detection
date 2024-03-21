@@ -16,7 +16,7 @@ parser.add_argument('--gpus', default=0, type=int, choices=[-1, 0, 1], help='gpu
 parser.add_argument('--lr', type=float, default=0.0001, help='learning rate (default: 0.0001)')
 parser.add_argument('--batch-size', type=int, default=128, help='number of instances in a batch of data (default: 128)')
 parser.add_argument('--workers', default=4, help='number of workers in dataloader')
-parser.add_argument('--model-name', default='wsanodet', help='name to save model')
+parser.add_argument('--model-name', default='wsanodetV3_', help='name to save model')
 parser.add_argument('--pretrained-ckpt', default=None, help='ckpt for pretrained model')
 parser.add_argument('--feature-size', type=int, default=1024+128, help='size of feature (default: 2048)')
 parser.add_argument('--num-classes', type=int, default=7, help='number of class')
