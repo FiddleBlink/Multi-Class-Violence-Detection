@@ -1,4 +1,4 @@
-from sklearn.metrics import roc_auc_score, f1_score, precision_score, recall_score, confusion_matrix, accuracy_score
+from sklearn.metrics import roc_auc_score, f1_score, precision_score, recall_score, accuracy_score, classification_report, confusion_matrix
 import numpy as np
 import torch
 
@@ -30,10 +30,14 @@ def test(dataloader, model, device, gt):
         recal = recall_score(list(gt), np.repeat(all_preds, 16), average='weighted')
         acc = accuracy_score(list(gt), np.repeat(all_preds, 16))
 
+        target_names = ['Normal', 'Fighting', 'Shooting', 'Explosion', 'Riot', 'Abuse', 'Car accident']
+        report = classification_report(list(gt), np.repeat(all_preds, 16), target_names=target_names)
+
         print(f'ROC AUC: {roc_auc}')
         print(f'F1: {f1}')
         print(f'Precision: {prec}')
         print(f'Recall: {recal}')
         print(f'Accuracy: {acc}')
+        print(report)
 
         return roc_auc, f1, prec, recal, acc

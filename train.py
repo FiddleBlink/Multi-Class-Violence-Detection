@@ -31,25 +31,37 @@ def CLAS2(logits, label, seq_len, criterion, device, is_topk=True):
     
     instance_logits = torch.sigmoid(instance_logits)
 
-    clsloss = criterion(logits, label)
+    clsloss = criterion(instance_logits, label.float())
     return clsloss
 
 
 def CENTROPY(logits, logits2, seq_len, device):
     instance_logits = 0.0  # tensor([])
     for i in range(logits.shape[0]):
-        tmp1 = torch.softmax(logits[i], dim=0)
-        tmp2 = torch.softmax(logits2[i], dim=0)
+        tmp1 = torch.softmax(logits[i, :seq_len[i]], dim=0)
+        tmp1 = torch.mean(tmp1, dim=1)  # Average across dim=1
+        tmp1 = tmp1.squeeze()  
+        tmp2 = torch.softmax(logits2[i, :seq_len[i]], dim=0).squeeze()
         instance_logits += -torch.mean(tmp1.detach() * torch.log(tmp2))
     
     instance_logits = instance_logits/logits.shape[0]
 
     return instance_logits
+    
+    
+    # for i in range(logits.shape[0]):
+    #     tmp1 = torch.sigmoid(logits[i, :seq_len[i]]).squeeze()
+    #     tmp2 = torch.sigmoid(logits2[i, :seq_len[i]]).squeeze()
+    #     loss = torch.mean(-tmp1.detach() * torch.log(tmp2))
+    #     instance_logits = instance_logits + loss
+    # instance_logits = instance_logits/logits.shape[0]
+    # return instance_logits
 
 
-def train(dataloader, model, optimizer, criterion, device, is_topk):
+def train(dataloader, model, optimizer, criterion, criterion2, device, is_topk):
     with torch.set_grad_enabled(True):
         model.train()
+        total_epoch_loss = 0
         for i, (input, label) in enumerate(dataloader):
             seq_len = torch.sum(torch.max(torch.abs(input), dim=2)[0]>0, 1)
             input = input[:, :torch.max(seq_len), :]
@@ -61,24 +73,23 @@ def train(dataloader, model, optimizer, criterion, device, is_topk):
 
             # encode the label to new variable so that anything greater than or equal to 1 is 1 else 0
             label2 = torch.where(label >= 1, torch.tensor(1).to(device), label)
+            
             # print("\n Label1===> ", label)
             # print("\n Label2===> ", label2)
-
-            # print('\n',input.shape)
-            # print(label.shape,'\n')
 
             logits, logits2 = model(input, seq_len)
 
             clsloss = CLAS(logits, label, seq_len, criterion, device, is_topk)
-            clsloss2 = CLAS2(logits2, label2, seq_len, criterion, device, is_topk)
+            clsloss2 = CLAS2(logits2, label2, seq_len, criterion2, device, is_topk)
             croloss = CENTROPY(logits, logits2, seq_len, device)
 
             total_loss = clsloss + clsloss2 + 5*croloss
 
-            # print('\n',clsloss)
-            # print(clsloss2)
-            print(f'Epoch: {i}, Loss: {total_loss}')
+            print(f'[INFO] INPUT: {i}, clsloss: {clsloss}, clsloss2: {clsloss2}, croloss: {croloss}, Total Loss: {total_loss}')
+            total_epoch_loss += total_loss.item()
 
             optimizer.zero_grad()
             total_loss.backward()
             optimizer.step()
+        average_loss = total_epoch_loss / len(dataloader)
+        return average_loss
