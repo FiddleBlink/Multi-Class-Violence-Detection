@@ -18,7 +18,7 @@ if __name__ == '__main__':
     model = Model(args)
     model = model.to(device)
     model_dict = model.load_state_dict(
-        {k.replace('module.', ''): v for k, v in torch.load('ckpt/wsanodetV3.pkl').items()})
+        {k.replace('module.', ''): v for k, v in torch.load('ckpt/wsanodetV4.pkl').items()})
     gt = np.load(args.gt)
     st = time.time()
     pr_auc, f1, precision1, recall1, accuracy = test(test_loader, model, device, gt)
