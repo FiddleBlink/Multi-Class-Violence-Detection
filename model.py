@@ -18,6 +18,8 @@ class Model(nn.Module):
 
         n_features = args.feature_size
         n_class = args.num_classes
+        
+        self.online_mode = args.online_mode
 
         self.conv1d1 = nn.Conv1d(in_channels=n_features, out_channels=512, kernel_size=1, padding=0)
         self.conv1d2 = nn.Conv1d(in_channels=512, out_channels=128, kernel_size=1, padding=0)
@@ -37,6 +39,7 @@ class Model(nn.Module):
         self.approximator = nn.Sequential(nn.Conv1d(128, 64, 1, padding=0), nn.ReLU(),
                                           nn.Conv1d(64, 32, 1, padding=0), nn.ReLU())
         self.conv1d_approximator = nn.Conv1d(32, 1, 5, padding=0)
+        self.conv1d_approximatorMulti = nn.Conv1d(32, 7, 5, padding=0)
         self.dropout = nn.Dropout(0.6)
         self.relu = nn.ReLU()
         self.tanh = nn.Tanh()
@@ -53,8 +56,13 @@ class Model(nn.Module):
 
         logits = self.approximator(x)
         logits = F.pad(logits, (4, 0))
+        
+        logitsMulti = self.conv1d_approximatorMulti(logits)
         logits = self.conv1d_approximator(logits)
+        
+        logitsMulti = logitsMulti.permute(0, 2, 1)
         logits = logits.permute(0, 2, 1)
+        
         x = x.permute(0, 2, 1)  # b*t*c
 
 
@@ -80,7 +88,11 @@ class Model(nn.Module):
 
         x = torch.cat((x1, x2, x3), 2)
         x = self.classifier(x)
-        return x, logits
+
+        if self.online_mode == 'Binary':
+            return x, logits
+        elif self.online_mode == 'Multi':
+            return x, logitsMulti
 
     def sadj(self, logits, seq_len):
         lens = logits.shape[1]
@@ -124,7 +136,6 @@ class Model(nn.Module):
                 adj2 = F.threshold(adj2, 0.7, 0)
                 adj2 = soft(adj2)
                 output[i, :seq_len[i], :seq_len[i]] = adj2
-
         return output
 
 

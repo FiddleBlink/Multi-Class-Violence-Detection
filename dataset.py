@@ -100,11 +100,12 @@ class Dataset(data.Dataset):
                 features = np.concatenate((features1[:-1], features2, features3[:-1]), axis=1)
         else:
             assert 1>2, 'Modality is wrong!'
+        
         if self.tranform is not None:
             features = self.tranform(features)
+        
         if self.test_mode:
             return features
-
         else:
             features = process_feat(features, self.max_seqlen, is_random=False)
             return features, label

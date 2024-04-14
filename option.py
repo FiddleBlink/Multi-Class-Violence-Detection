@@ -24,3 +24,5 @@ parser.add_argument('--num-classes', type=int, default=7, help='number of class'
 parser.add_argument('--dataset-name', default='XD-Violence', help='dataset to train on (default: )')
 parser.add_argument('--max-seqlen', type=int, default=200, help='maximum sequence length during training (default: 750)')
 parser.add_argument('--max-epoch', type=int, default=50, help='maximum iteration to train (default: 100)')
+parser.add_argument('--weights', default='Normal', help='Adding weights to the sample data (default: Normal) Normal or Inverse')
+parser.add_argument('--online-mode', default='Binary', help='Choosing the mode to train the online mode in (default: Binary) Binary or Multi')

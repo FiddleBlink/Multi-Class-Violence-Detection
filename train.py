@@ -1,7 +1,7 @@
 import torch
 
 
-def CLAS(logits, label, seq_len, criterion, device, is_topk=True):
+def CLAS(logits, label, seq_len, criterion, device, sample_weights=None, is_topk=True):
     logits = logits.squeeze()
     instance_logits = torch.zeros(7).to(device)  # tensor([])
     outx = []
@@ -15,7 +15,10 @@ def CLAS(logits, label, seq_len, criterion, device, is_topk=True):
         outx.append(tmp)
     instance_logits = torch.stack(outx)
 
-    clsloss = criterion(instance_logits, label)
+    if sample_weights is None:
+        clsloss = criterion(instance_logits, label)
+    else:
+        clsloss = criterion(instance_logits, label, sample_weights)
     return clsloss
 
 def CLAS2(logits, label, seq_len, criterion, device, is_topk=True):
@@ -34,21 +37,38 @@ def CLAS2(logits, label, seq_len, criterion, device, is_topk=True):
     clsloss = criterion(instance_logits, label.float())
     return clsloss
 
-
-def CENTROPY(logits, logits2, seq_len, device):
+def CENTROPY(logits, logits2, seq_len, device, online_mode, sample_weights=None):
     instance_logits = 0.0  # tensor([])
-    for i in range(logits.shape[0]):
-        tmp1 = torch.softmax(logits[i, :seq_len[i]], dim=0)
-        tmp1 = torch.mean(tmp1, dim=1)  # Average across dim=1
-        tmp1 = tmp1.squeeze()  
-        tmp2 = torch.softmax(logits2[i, :seq_len[i]], dim=0).squeeze()
-        instance_logits += -torch.mean(tmp1.detach() * torch.log(tmp2))
+
+    if online_mode == 'Binary':
+        for i in range(logits.shape[0]):
+            tmp1 = torch.softmax(logits[i, :seq_len[i]], dim=0)
+            tmp1 = torch.mean(tmp1, dim=1)  # Average across dim=1
+            tmp1 = tmp1.squeeze()  
+            tmp2 = torch.softmax(logits2[i, :seq_len[i]], dim=0).squeeze()
+            crosOut = -torch.mean(tmp1.detach() * torch.log(tmp2))
+            if sample_weights is not None:
+                instance_logits += crosOut * sample_weights[i]
+            else:
+                instance_logits += crosOut
+    elif online_mode == 'Multi':
+        for i in range(logits.shape[0]):
+            tmp1 = torch.softmax(logits[i, :seq_len[i]], dim=0)
+            tmp1 = torch.mean(tmp1, dim=1)  # Average across dim=1
+            tmp1 = tmp1.squeeze()  
+            # tmp2 = torch.softmax(logits2[i, :seq_len[i]], dim=0).squeeze()
+            tmp2 = torch.softmax(logits2[i, :seq_len[i]], dim=0)
+            tmp2 = torch.mean(tmp2, dim=1)  # Average across dim=1
+            tmp2 = tmp2.squeeze()  
+            crosOut = -torch.mean(tmp1.detach() * torch.log(tmp2))
+            if sample_weights is not None:
+                instance_logits += crosOut * sample_weights[i]
+            else:
+                instance_logits += crosOut
     
     instance_logits = instance_logits/logits.shape[0]
 
     return instance_logits
-    
-    
     # for i in range(logits.shape[0]):
     #     tmp1 = torch.sigmoid(logits[i, :seq_len[i]]).squeeze()
     #     tmp2 = torch.sigmoid(logits2[i, :seq_len[i]]).squeeze()
@@ -58,7 +78,7 @@ def CENTROPY(logits, logits2, seq_len, device):
     # return instance_logits
 
 
-def train(dataloader, model, optimizer, criterion, criterion2, device, is_topk):
+def train(dataloader, model, optimizer, criterion, criterion2, device, is_topk, class_weights, online_mode):
     with torch.set_grad_enabled(True):
         model.train()
         total_epoch_loss = 0
@@ -69,19 +89,26 @@ def train(dataloader, model, optimizer, criterion, criterion2, device, is_topk):
 
             label = label.to(torch.int64)
 
-            # label = torch.nn.functional.one_hot(label.to(torch.int64), num_classes=7).float()
-
-            # encode the label to new variable so that anything greater than or equal to 1 is 1 else 0
-            label2 = torch.where(label >= 1, torch.tensor(1).to(device), label)
+            if class_weights is not None:
+                class_weights = class_weights.to(device)
+                sample_weights = class_weights[label]
+            else:
+                sample_weights = None
             
-            # print("\n Label1===> ", label)
-            # print("\n Label2===> ", label2)
-
+            # label = torch.nn.functional.one_hot(label.to(torch.int64), num_classes=7).float()
+            # encode the label to new variable so that anything greater than or equal to 1 is 1 else 0
+            
             logits, logits2 = model(input, seq_len)
 
-            clsloss = CLAS(logits, label, seq_len, criterion, device, is_topk)
-            clsloss2 = CLAS2(logits2, label2, seq_len, criterion2, device, is_topk)
-            croloss = CENTROPY(logits, logits2, seq_len, device)
+            clsloss = CLAS(logits, label, seq_len, criterion, device, sample_weights, is_topk)
+
+            if online_mode == 'Binary':
+                label2 = torch.where(label >= 1, torch.tensor(1).to(device), label)
+                clsloss2 = CLAS2(logits2, label2, seq_len, criterion2, device, is_topk)    
+            elif online_mode == 'Multi':        
+                clsloss2 = CLAS(logits2, label, seq_len, criterion, device, sample_weights, is_topk)
+
+            croloss = CENTROPY(logits, logits2, seq_len, device, online_mode, sample_weights)
 
             total_loss = clsloss + clsloss2 + 5*croloss
 

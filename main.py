@@ -24,6 +24,28 @@ if __name__ == '__main__':
     # setup_seed(2333)
     args = option.parser.parse_args()
     device = torch.device("cuda")
+
+    if args.weights == 'Inverse':
+        train_data_all = DataLoader(Dataset(args, test_mode=False), batch_size=args.batch_size, shuffle=True)
+        all_labels = []
+
+        for i, (input, label) in enumerate(train_data_all):
+            print(i)
+            all_labels.append(label)
+
+        all_labels = torch.cat(all_labels, dim=0)
+        print(f'DataLoader: {all_labels.shape}')
+
+        torch_labels = torch.tensor(all_labels, dtype=torch.int64) 
+
+        # Calculate class frequencies
+        class_counts = torch.bincount(torch_labels)
+        # Calculate inverse class frequencies
+        class_weights = 1.0 / class_counts
+        # Normalize weights
+        class_weights /= class_weights.sum()
+    
+
     train_loader = DataLoader(Dataset(args, test_mode=False),
                               batch_size=args.batch_size, shuffle=True,
                               num_workers=args.workers, pin_memory=True)
@@ -49,7 +71,20 @@ if __name__ == '__main__':
                             ],
                             lr=args.lr, weight_decay=0.000)
     scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[10], gamma=0.1)
-    criterion = torch.nn.CrossEntropyLoss()
+
+    class WeightedCrossEntropyLoss(torch.nn.Module):
+        def __init__(self):
+            super(WeightedCrossEntropyLoss, self).__init__()
+
+        def forward(self, input, target, sample_weights):
+            ce_loss = torch.nn.CrossEntropyLoss(reduction='none')(input, target)
+            weighted_ce_loss = ce_loss * sample_weights
+            return torch.mean(weighted_ce_loss)
+
+    if args.weights == 'Inverse':
+        criterion = WeightedCrossEntropyLoss()
+    elif args.weights == 'Normal':
+        criterion = torch.nn.CrossEntropyLoss()
     criterion2 = torch.nn.BCELoss()
 
     is_topk = True
@@ -70,11 +105,15 @@ if __name__ == '__main__':
     roc_auc_arr = []
     
     for epoch in range(args.max_epoch - latestepoch):
-        print(f'[INFO] EPOCH No.{epoch + 1 + latestepoch} under Processing=====\n\n')
+        print(f'[INFO] EPOCH No.{epoch + 1 + latestepoch} under Processing===== ONLINE MODE: {args.online_mode} == WEIGHTS: {args.weights}\n\n')
         
         scheduler.step()
         st = time.time()
-        loss = train(train_loader, model, optimizer, criterion, criterion2, device, is_topk)
+        if args.weights == 'Inverse':
+            loss = train(train_loader, model, optimizer, criterion, criterion2, device, is_topk, class_weights, args.online_mode)
+        elif args.weights == 'Normal':
+            loss = train(train_loader, model, optimizer, criterion, criterion2, device, is_topk, None, args.online_mode)
+        
         train_losses.append(loss)
         
         if epoch % 2 == 0 and not epoch == 0:
@@ -88,11 +127,11 @@ if __name__ == '__main__':
         recall_arr.append(recall1)
         roc_auc_arr.append(roc_auc)
 
-    np.save('./ckpt/train_losses.npy'.format(epoch), np.array(train_losses))
-    np.save('./ckpt/roc_auc.npy'.format(epoch), np.array(roc_auc_arr))
-    np.save('./ckpt/f1.npy'.format(epoch), np.array(f1_arr))
-    np.save('./ckpt/precision.npy'.format(epoch), np.array(precision_arr))
-    np.save('./ckpt/recall.npy'.format(epoch), np.array(recall_arr))
-    np.save('./ckpt/accuracy.npy'.format(epoch), np.array(accuracy_arr))
+    np.save(f'./ckpt/train_losses_{args.online_mode}_{args.weights}.npy', np.array(train_losses))
+    np.save(f'./ckpt/roc_auc_{args.online_mode}_{args.weights}.npy', np.array(roc_auc_arr))
+    np.save(f'./ckpt/f1_{args.online_mode}_{args.weights}.npy', np.array(f1_arr))
+    np.save(f'./ckpt/precision_{args.online_mode}_{args.weights}.npy', np.array(precision_arr))
+    np.save(f'./ckpt/recall_{args.online_mode}_{args.weights}.npy', np.array(recall_arr))
+    np.save(f'./ckpt/accuracy_{args.online_mode}_{args.weights}.npy', np.array(accuracy_arr))
 
     torch.save(model.state_dict(), './ckpt/' + args.model_name + '.pkl')
