@@ -65,11 +65,19 @@ if __name__ == '__main__':
 
     if not os.path.exists('./ckpt'):
         os.makedirs('./ckpt')
-    optimizer = optim.Adam([{'params': base_param},
+
+    if args.optimizer == 'Adam':
+        optimizer = optim.Adam([{'params': base_param},
                             {'params': model.approximator.parameters(), 'lr': args.lr / 2},
                             {'params': model.conv1d_approximator.parameters(), 'lr': args.lr / 2},
                             ],
                             lr=args.lr, weight_decay=0.000)
+    elif args.optimizer == 'SGD':
+        optimizer = optim.SGD([{'params': base_param},
+                            {'params': model.approximator.parameters(), 'lr': args.lr / 2},
+                            {'params': model.conv1d_approximator.parameters(), 'lr': args.lr / 2},
+                            ], lr=args.lr, weight_decay=0.000)
+
     scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[10], gamma=0.1)
 
     class WeightedCrossEntropyLoss(torch.nn.Module):
@@ -105,7 +113,7 @@ if __name__ == '__main__':
     roc_auc_arr = []
     
     for epoch in range(args.max_epoch - latestepoch):
-        print(f'[INFO] EPOCH No.{epoch + 1 + latestepoch} under Processing===== ONLINE MODE: {args.online_mode} == WEIGHTS: {args.weights}\n\n')
+        print(f'[INFO] EPOCH No.{epoch + 1 + latestepoch} under Processing===== ONLINE MODE: {args.online_mode} == WEIGHTS: {args.weights} == OPTIMIZER: {args.optimizer}\n\n')
         
         scheduler.step()
         st = time.time()
