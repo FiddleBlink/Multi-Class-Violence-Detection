@@ -117,7 +117,7 @@ if __name__ == '__main__':
         print(f'[INFO] EPOCH No.{epoch + 1 + latestepoch} under Processing===== ONLINE MODE: {args.online_mode} == WEIGHTS: {args.weights} == OPTIMIZER: {args.optimizer}\n\n')
         
         scheduler.step()
-        st = time.time()
+        st = time.time() 
         if args.weights == 'Inverse':
             loss = train(train_loader, model, optimizer, criterion, criterion2, device, is_topk, class_weights, args.online_mode)
         elif args.weights == 'Normal':
