@@ -40,4 +40,4 @@ def test(dataloader, model, device, gt):
         print(f'Accuracy: {acc}')
         print(report)
 
-        return roc_auc, f1, prec, recal, acc
+        return roc_auc, f1, prec, recal, acc, report

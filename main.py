@@ -111,6 +111,7 @@ if __name__ == '__main__':
     precision_arr = []
     recall_arr = []
     roc_auc_arr = []
+    report_arr = []
     
     for epoch in range(args.max_epoch - latestepoch):
         print(f'[INFO] EPOCH No.{epoch + 1 + latestepoch} under Processing===== ONLINE MODE: {args.online_mode} == WEIGHTS: {args.weights} == OPTIMIZER: {args.optimizer}\n\n')
@@ -127,13 +128,14 @@ if __name__ == '__main__':
         if epoch % 2 == 0 and not epoch == 0:
             torch.save(model.state_dict(), './ckpt/'+args.model_name+'{}.pkl'.format(epoch))
 
-        roc_auc, f1, precision1, recall1, accuracy = test(test_loader, model, device, gt)
+        roc_auc, f1, precision1, recall1, accuracy, report = test(test_loader, model, device, gt)
         # print('Epoch {0}/{1}: offline roc_auc:{2:.4}'.format(epoch, args.max_epoch, roc_auc))
         accuracy_arr.append(accuracy)
         f1_arr.append(f1)
         precision_arr.append(precision1)
         recall_arr.append(recall1)
         roc_auc_arr.append(roc_auc)
+        report_arr.append(report)
 
     np.save(f'./ckpt/train_losses_{args.online_mode}_{args.weights}.npy', np.array(train_losses))
     np.save(f'./ckpt/roc_auc_{args.online_mode}_{args.weights}.npy', np.array(roc_auc_arr))
@@ -141,5 +143,6 @@ if __name__ == '__main__':
     np.save(f'./ckpt/precision_{args.online_mode}_{args.weights}.npy', np.array(precision_arr))
     np.save(f'./ckpt/recall_{args.online_mode}_{args.weights}.npy', np.array(recall_arr))
     np.save(f'./ckpt/accuracy_{args.online_mode}_{args.weights}.npy', np.array(accuracy_arr))
+    np.save(f'./ckpt/report_{args.online_mode}_{args.weights}.npy', np.array(report_arr))
 
     torch.save(model.state_dict(), './ckpt/' + args.model_name + '.pkl')
