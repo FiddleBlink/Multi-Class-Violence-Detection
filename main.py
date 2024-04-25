@@ -125,7 +125,7 @@ if __name__ == '__main__':
         
         train_losses.append(loss)
         
-        if epoch % 2 == 0 and not epoch == 0:
+        if epoch % 10 == 0 and not epoch == 0:
             torch.save(model.state_dict(), './ckpt/'+args.model_name+'{}.pkl'.format(epoch))
 
         roc_auc, f1, precision1, recall1, accuracy, report = test(test_loader, model, device, gt)

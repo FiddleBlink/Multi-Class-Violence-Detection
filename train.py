@@ -112,7 +112,7 @@ def train(dataloader, model, optimizer, criterion, criterion2, device, is_topk, 
 
             total_loss = clsloss + clsloss2 + 5*croloss
 
-            print(f'[INFO] INPUT: {i}, clsloss: {clsloss}, clsloss2: {clsloss2}, croloss: {croloss}, Total Loss: {total_loss}')
+            # print(f'[INFO] INPUT: {i}, clsloss: {clsloss}, clsloss2: {clsloss2}, croloss: {croloss}, Total Loss: {total_loss}')
             total_epoch_loss += total_loss.item()
 
             optimizer.zero_grad()
