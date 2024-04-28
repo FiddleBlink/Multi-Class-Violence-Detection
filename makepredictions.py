@@ -37,6 +37,45 @@ if __name__ == '__main__':
 
             probabilities = list(pred.cpu().detach().numpy())
             probabilities = [round(num, 3) for num in probabilities]
-            print(probabilities)
-            print(logits.shape)
+
+            time_stramp = {
+                "fighting":[],
+                "shooting":[],
+                "explosion":[],
+                "riot":[],
+                "abuse":[],
+                "accident":[]
+            }
+
+            occurence = 0
+
+            activity = set(probabilities)
+
+            for i in activity:
+                for j in range(len(probabilities)-1):
+                    if(i == probabilities[j] and occurence == 0):
+                        start_frame = j
+                        start_timestamp = (start_frame * 16)/ 24
+                    if(i == probabilities[j]):
+                        occurence = occurence + 1
+                    if( (i == probabilities[j] and i != probabilities[j+1]) or ( i == probabilities[j] and j == len(probabilities)-2 )):
+                        occurence = 0
+                        end_frame = j
+                        end_timestamp = (end_frame * 16)/ 24
+                        if(end_timestamp - start_timestamp < 3):
+                            continue
+                        if(i==1):
+                            time_stramp["fighting"].append({"start_time":round(start_timestamp, 2),"end_time":round(end_timestamp, 2)})
+                        elif(i==2):
+                            time_stramp["shooting"].append({"start_time":round(start_timestamp, 2),"end_time":round(end_timestamp, 2)})
+                        elif(i==3):
+                            time_stramp["explosion"].append({"start_time":round(start_timestamp, 2),"end_time":round(end_timestamp, 2)})
+                        elif(i==4):
+                            time_stramp["riot"].append({"start_time":round(start_timestamp, 2),"end_time":round(end_timestamp, 2)})
+                        elif(i==5):
+                            time_stramp["abuse"].append({"start_time":round(start_timestamp, 2),"end_time":round(end_timestamp, 2)})
+                        elif(i==6):
+                            time_stramp["accident"].append({"start_time":round(start_timestamp, 2),"end_time":round(end_timestamp, 2)})
+
+            print(time_stramp)
             
