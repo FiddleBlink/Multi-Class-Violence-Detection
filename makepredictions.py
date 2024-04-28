@@ -21,7 +21,7 @@ if __name__ == '__main__':
     model = Model(args)
     model = model.to(device)
     model_dict = model.load_state_dict(
-        {k.replace('module.', ''): v for k, v in torch.load('ckpt/Binary Inverse Adam/wsanodet_Adam_Binary_Inverse_50.pkl').items()})
+        {k.replace('module.', ''): v for k, v in torch.load('ckpt/Binary Normal Adam/wsanodetV5.pkl').items()})
     
     model.eval()
     with torch.no_grad():
@@ -77,5 +77,8 @@ if __name__ == '__main__':
                         elif(i==6):
                             time_stramp["accident"].append({"start_time":round(start_timestamp, 2),"end_time":round(end_timestamp, 2)})
 
+            print(probabilities)
             print(time_stramp)
+            print((len(probabilities)*16)/24)
+            print("\n")
             
