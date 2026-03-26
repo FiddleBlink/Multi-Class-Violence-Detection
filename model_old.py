@@ -1,3 +1,4 @@
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -12,7 +13,6 @@ def weight_init(m):
         torch_init.xavier_uniform_(m.weight)
         if hasattr(m, 'bias') and m.bias is not None:
             m.bias.data.fill_(0.1)
-
 
 class PositionalEncoding(nn.Module):
     """Add positional encoding to temporal features (handles variable sequence lengths)"""
@@ -54,15 +54,31 @@ class PositionalEncoding(nn.Module):
             return x + self.pe[:, :seq_len].detach()
 
 
+class ModalityFusion(nn.Module):
+    """Learn to fuse multiple modalities"""
+    def __init__(self, input_dim, output_dim):
+        super(ModalityFusion, self).__init__()
+        self.fc = nn.Sequential(
+            nn.Linear(input_dim, output_dim),
+            nn.LayerNorm(output_dim),  # LayerNorm works on feature dimension
+            nn.ReLU(),
+            nn.Dropout(0.3)
+        )
+        self.attention = nn.Sequential(
+            nn.Linear(input_dim, 32),
+            nn.ReLU(),
+            nn.Linear(32, 1),
+            nn.Softmax(dim=1)
+        )
+
+    def forward(self, x):
+        # x shape: (B, T, F)
+        attn_weights = self.attention(x)  # (B, T, 1)
+        weighted = x * attn_weights
+        return self.fc(weighted)
+
+
 class Model(nn.Module):
-    """
-    XD-Violence Model - Option 3 (Simplified for Paper)
-    Based on XD-Violence paper with:
-    - Core Conv + GCN architecture (unchanged)
-    - Positional Encoding for temporal awareness (added)
-    - Multi-class classification (modified from binary)
-    - Simplified classifier and approximator
-    """
     def __init__(self, args):
         super(Model, self).__init__()
 
@@ -72,14 +88,14 @@ class Model(nn.Module):
         self.online_mode = args.online_mode
         self.max_seqlen = getattr(args, 'max_seqlen', 200)
 
-        # Feature projection (simple linear fusion of RGB + Audio)
-        self.fusion = nn.Linear(n_features, 256)
+        # Feature projection and fusion
+        self.fusion = ModalityFusion(n_features, 256)
         self.bn_initial = nn.BatchNorm1d(256)
         
         # Positional encoding for temporal awareness
         self.pos_encoding = PositionalEncoding(256, self.max_seqlen)
         
-        # Main feature extraction pipeline (from XD-Violence)
+        # Main feature extraction pipeline
         self.conv1d1 = nn.Conv1d(in_channels=256, out_channels=512, kernel_size=1, padding=0)
         self.bn1 = nn.BatchNorm1d(512)
         
@@ -92,7 +108,7 @@ class Model(nn.Module):
         self.conv1d4 = nn.Conv1d(in_channels=128, out_channels=64, kernel_size=3, padding=1)
         self.bn4 = nn.BatchNorm1d(64)
         
-        # Graph Convolution with 3 adjacency matrices (from XD-Violence paper)
+        # Graph Convolution with shared weights (more efficient)
         self.gc1 = GraphConvolution(64, 64, residual=True)
         self.gc2 = GraphConvolution(64, 64, residual=True)
         self.gc_bn1 = nn.BatchNorm1d(64)
@@ -108,22 +124,31 @@ class Model(nn.Module):
         self.gc_bn5 = nn.BatchNorm1d(64)
         self.gc_bn6 = nn.BatchNorm1d(64)
         
-        # Adjacency matrix generation
+        # Adjacency matrix generation (now as layers)
         self.simAdj = SimilarityAdj(256, 32)
         self.disAdj = DistanceAdj()
 
-        # Simplified classifier (2-layer MLP)
+        # Enhanced classifier
+        # Use LayerNorm here because inputs are (B, T, channels) after concat
         self.classifier = nn.Sequential(
-            nn.Linear(64*3, 128),
+            nn.Linear(64*3, 256),
+            nn.LayerNorm(256),
+            nn.ReLU(),
+            nn.Dropout(0.4),
+            nn.Linear(256, 128),
             nn.LayerNorm(128),
             nn.ReLU(),
             nn.Dropout(0.3),
             nn.Linear(128, n_class)
         )
         
-        # Simplified approximator network (2-layer)
+        # Enhanced approximator network
         self.approximator = nn.Sequential(
-            nn.Conv1d(64, 64, 3, padding=1),
+            nn.Conv1d(64, 128, 3, padding=1),
+            nn.BatchNorm1d(128),
+            nn.ReLU(),
+            nn.Dropout(0.3),
+            nn.Conv1d(128, 64, 3, padding=1),
             nn.BatchNorm1d(64),
             nn.ReLU(),
             nn.Dropout(0.3),
@@ -134,24 +159,26 @@ class Model(nn.Module):
         self.conv1d_approximatorMulti = nn.Conv1d(32, 7, 3, padding=1)
         
         # Regularization
+        self.dropout_heavy = nn.Dropout(0.5)
         self.dropout_light = nn.Dropout(0.3)
         self.relu = nn.ReLU()
+        self.tanh = nn.Tanh()
         self.sigmoid = nn.Sigmoid()
         
         self.apply(weight_init)
 
     def forward(self, inputs, seq_len):
-        # Feature projection (fusion of RGB + Audio features)
-        x = self.fusion(inputs)  # (B, T, 256) - simple linear projection
+        # Modality fusion and projection
+        x = self.fusion(inputs)  # (B, T, 256)
         x = x.permute(0, 2, 1)  # (B, 256, T)
         x = self.bn_initial(x)
         x = x.permute(0, 2, 1)  # (B, T, 256)
         
-        # Add positional encoding for temporal awareness
+        # Add positional encoding
         x = self.pos_encoding(x)
         x = x.permute(0, 2, 1)  # (B, 256, T) for conv1d
 
-        # Feature extraction (from XD-Violence paper)
+        # Feature extraction
         x = self.relu(self.bn1(self.conv1d1(x)))
         x = self.dropout_light(x)
         
@@ -172,15 +199,15 @@ class Model(nn.Module):
 
         logitsMulti = logitsMulti.permute(0, 2, 1)
         logits = logits.permute(0, 2, 1)
-        
+
         x = x.permute(0, 2, 1)  # (B, T, 64)
 
-        # Generate adjacency matrices for graph convolution
+        # Generate adjacency matrices
         adj = self._compute_adj(inputs, seq_len)
         disadj = self.disAdj(x.shape[0], x.shape[1])
         scoadj = self._compute_score_adj(logits, seq_len)
 
-        # Multi-source graph convolution (3 parallel pathways from XD-Violence)
+        # Multi-source graph convolution
         x1_h = self.relu(self.gc_bn1(self.gc1(x, adj).permute(0, 2, 1)).permute(0, 2, 1))
         x1_h = self.dropout_light(x1_h)
         x1 = self.relu(self.gc_bn2(self.gc2(x1_h, adj).permute(0, 2, 1)).permute(0, 2, 1))
@@ -252,3 +279,5 @@ class Model(nn.Module):
                 adj_out = soft(tmp)
                 output[i, :seq_len[i], :seq_len[i]] = adj_out
         return output
+
+

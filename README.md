@@ -17,3 +17,14 @@ where we oversample each video frame with the “5-crop” augment, “5-crop”
   &nbsp; &nbsp; &nbsp;  *the model is in the ckpt folder.*
 
 Thanks for your attention!
+
+# Setup
+- Install python 3.11
+- Install everything in requirements.txt
+  pip install -r requirements.txt
+- Install pytorch
+  pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 --extra-index-url https://download.pytorch.org/whl/cu118
+- set the customizations in options.py
+- run this code to get started: 
+  python main.py --seed 42 --lr 0.0001 --batch-size 128 --max-epoch 50 --grad-clip 1.0 
+
