@@ -66,17 +66,17 @@ def test(dataloader, model, device, gt):
 			target_names = ['Normal', 'Fighting', 'Shooting', 'Explosion', 'Riot', 'Abuse', 'Car accident']
 			report = classification_report(list(gt), repeated_preds, target_names=target_names, zero_division=0)
 
-			logging.info(f'\n=== Test Results ===')
-			logging.info(f'ROC AUC: {roc_auc:.4f}')
-			logging.info(f'F1 Score: {f1:.4f}')
-			logging.info(f'Precision: {prec:.4f}')
-			logging.info(f'Recall: {recal:.4f}')
-			logging.info(f'Accuracy: {acc:.4f}')
-			logging.info(f'mAP: {mAP:.4f}')
-			logging.info(f'\nClassification Report:\n{report}')
-			logging.info(f'\nConfusion Matrix:\n{cm}')
+			# logging.info(f'\n=== Test Results ===')
+			# logging.info(f'ROC AUC: {roc_auc:.4f}')
+			# logging.info(f'F1 Score: {f1:.4f}')
+			# logging.info(f'Precision: {prec:.4f}')
+			# logging.info(f'Recall: {recal:.4f}')
+			# logging.info(f'Accuracy: {acc:.4f}')
+			# logging.info(f'mAP: {mAP:.4f}')
+			# logging.info(f'\nClassification Report:\n{report}')
+			# logging.info(f'\nConfusion Matrix:\n{cm}')
 
-			return roc_auc, f1, prec, recal, acc, mAP
+			return roc_auc, f1, prec, recal, acc, mAP, cm, report
 		except Exception as e:
 			logging.error(f"[TEST] Critical error in test function: {str(e)}")
 			return 0.0, 0.0, 0.0, 0.0, 0.0, None

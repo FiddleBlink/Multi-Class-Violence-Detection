@@ -12,7 +12,35 @@ from test import test
 import option
 import logging
 
-logging.basicConfig(level=logging.INFO, format='[%(levelname)s] %(message)s')
+def setup_logging(log_dir):
+	"""Setup logging with both console and file handlers"""
+	# Create logs directory if it doesn't exist
+	os.makedirs(log_dir, exist_ok=True)
+	
+	# Get root logger
+	logger = logging.getLogger()
+	logger.setLevel(logging.INFO)
+	
+	# Clear any existing handlers
+	logger.handlers.clear()
+	
+	# Create formatters and handlers
+	formatter = logging.Formatter('[%(levelname)s] %(message)s')
+	
+	# Console handler
+	console_handler = logging.StreamHandler()
+	console_handler.setLevel(logging.INFO)
+	console_handler.setFormatter(formatter)
+	logger.addHandler(console_handler)
+	
+	# File handler
+	log_file = os.path.join(log_dir, 'training.log')
+	file_handler = logging.FileHandler(log_file)
+	file_handler.setLevel(logging.INFO)
+	file_handler.setFormatter(formatter)
+	logger.addHandler(file_handler)
+	
+	return logger
 
 def setup_seed(seed):
 	torch.manual_seed(seed)
@@ -26,9 +54,17 @@ if __name__ == '__main__':
 	# setup_seed(2333)
 	args = option.parser.parse_args()
 	
+	# Create checkpoint and logs directories, then setup logging
+	if not os.path.exists('./ckpt'):
+		os.makedirs(f'./ckpt/{args.model_name}')
+	
+	log_dir = f'./ckpt/{args.model_name}/logs'
+	setup_logging(log_dir)
+	
 	logging.info(f'=== XDVioDet Training Started ===')
 	logging.info(f'Mode: {args.scoring_mode} | Weights: {args.weights} | Optimizer: {args.optimizer}')
 	logging.info(f'LR: {args.lr} | Batch Size: {args.batch_size} | Max Epochs: {args.max_epoch}')
+	logging.info(f'Logging to: {log_dir}')
 
 	device = torch.device("cuda")
 	logging.info(f'Device: {device}')
@@ -75,10 +111,6 @@ if __name__ == '__main__':
 	approximator_param += list(map(id, model.conv1d_approximator.parameters()))
 	base_param = filter(lambda p: id(p) not in approximator_param, model.parameters())
 
-	if not os.path.exists('./ckpt'):
-		os.makedirs('./ckpt')
-		logging.info('Created checkpoint directory: ./ckpt')
-
 	if args.optimizer == 'Adam':
 		optimizer = optim.Adam([{'params': base_param},
 							{'params': model.approximator.parameters(), 'lr': args.lr / 2},
@@ -110,7 +142,7 @@ if __name__ == '__main__':
 	elif args.weights == 'Normal':
 		criterion = torch.nn.CrossEntropyLoss()
 		logging.info('Using standard cross-entropy loss')
-	criterion2 = torch.nn.BCELoss()
+	criterion2 = torch.nn.BCEWithLogitsLoss()
 
 	is_topk = True
 	gt = np.load(args.gt)
@@ -130,6 +162,8 @@ if __name__ == '__main__':
 	recall_arr = []
 	roc_auc_arr = []
 	mAP_arr = []
+	cm_arr = []
+	report_arr = []
 	
 	try:
 		for epoch in range(args.max_epoch - latestepoch):
@@ -155,10 +189,10 @@ if __name__ == '__main__':
 				continue
 			
 			if epoch % 2 == 0 and not epoch == 0:
-				torch.save(model.state_dict(), './ckpt/'+args.model_name+'{}.pkl'.format(epoch))
+				torch.save(model.state_dict(), f'./ckpt/{args.model_name}/'+args.model_name+'{}.pkl'.format(epoch))
 				logging.info(f'Model checkpoint saved')
 
-			roc_auc, f1, precision1, recall1, accuracy, mAP = test(test_loader, model, device, gt)
+			roc_auc, f1, precision1, recall1, accuracy, mAP, cm ,report = test(test_loader, model, device, gt)
 			# print('Epoch {0}/{1}: offline roc_auc:{2:.4}'.format(epoch, args.max_epoch, roc_auc))
 			accuracy_arr.append(accuracy)
 			f1_arr.append(f1)
@@ -166,6 +200,8 @@ if __name__ == '__main__':
 			recall_arr.append(recall1)
 			roc_auc_arr.append(roc_auc)
 			mAP_arr.append(mAP)
+			cm_arr.append(cm)
+			report_arr.append(report)
 	
 			logging.info(f'\nTest Metrics:')
 			logging.info(f'  ROC AUC: {roc_auc:.4f}')
@@ -174,19 +210,23 @@ if __name__ == '__main__':
 			logging.info(f'  Precision: {precision1:.4f}')
 			logging.info(f'  Recall: {recall1:.4f}')
 			logging.info(f'  Accuracy: {accuracy:.4f}')
+			logging.info(f'\nClassification Report:\n{report}')
+			logging.info(f'\nConfusion Matrix:\n{cm}')
 		
 		logging.info('\n' + "="*80)
 		logging.info('Training completed. Saving results...')
 
-		np.save(f'./ckpt/train_losses_{args.scoring_mode}_{args.weights}.npy', np.array(train_losses))
-		np.save(f'./ckpt/roc_auc_{args.scoring_mode}_{args.weights}.npy', np.array(roc_auc_arr))
-		np.save(f'./ckpt/f1_{args.scoring_mode}_{args.weights}.npy', np.array(f1_arr))
-		np.save(f'./ckpt/precision_{args.scoring_mode}_{args.weights}.npy', np.array(precision_arr))
-		np.save(f'./ckpt/recall_{args.scoring_mode}_{args.weights}.npy', np.array(recall_arr))
-		np.save(f'./ckpt/accuracy_{args.scoring_mode}_{args.weights}.npy', np.array(accuracy_arr))
-		np.save(f'./ckpt/mAP_{args.online_mode}_{args.weights}.npy', np.array(mAP_arr))
+		np.save(f'./ckpt/{args.model_name}/train_losses_{args.scoring_mode}_{args.weights}.npy', np.array(train_losses))
+		np.save(f'./ckpt/{args.model_name}/roc_auc_{args.scoring_mode}_{args.weights}.npy', np.array(roc_auc_arr))
+		np.save(f'./ckpt/{args.model_name}/f1_{args.scoring_mode}_{args.weights}.npy', np.array(f1_arr))
+		np.save(f'./ckpt/{args.model_name}/precision_{args.scoring_mode}_{args.weights}.npy', np.array(precision_arr))
+		np.save(f'./ckpt/{args.model_name}/recall_{args.scoring_mode}_{args.weights}.npy', np.array(recall_arr))
+		np.save(f'./ckpt/{args.model_name}/accuracy_{args.scoring_mode}_{args.weights}.npy', np.array(accuracy_arr))
+		np.save(f'./ckpt/{args.model_name}/mAP_{args.scoring_mode}_{args.weights}.npy', np.array(mAP_arr))
+		np.save(f'./ckpt/{args.model_name}/cm_{args.scoring_mode}_{args.weights}.npy', np.array(cm_arr, dtype=object))
+		np.save(f'./ckpt/{args.model_name}/report_{args.scoring_mode}_{args.weights}.npy', np.array(report_arr, dtype=object))
 
-		torch.save(model.state_dict(), './ckpt/' + args.model_name + '.pkl')
+		torch.save(model.state_dict(), f'./ckpt/{args.model_name}/' + args.model_name + '.pkl')
 	
 	except KeyboardInterrupt:
 		logging.info('\nTraining interrupted by user')
