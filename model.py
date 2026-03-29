@@ -19,7 +19,7 @@ class Model(nn.Module):
         n_features = args.feature_size
         n_class = args.num_classes
         
-        self.online_mode = args.online_mode
+        self.scoring_mode = args.scoring_mode
 
         self.conv1d1 = nn.Conv1d(in_channels=n_features, out_channels=512, kernel_size=1, padding=0)
         self.conv1d2 = nn.Conv1d(in_channels=512, out_channels=128, kernel_size=1, padding=0)
@@ -89,9 +89,9 @@ class Model(nn.Module):
         x = torch.cat((x1, x2, x3), 2)
         x = self.classifier(x)
 
-        if self.online_mode == 'Binary':
+        if self.scoring_mode == 'Binary':
             return x, logits
-        elif self.online_mode == 'Multi':
+        elif self.scoring_mode == 'Multi':
             return x, logitsMulti
 
     def sadj(self, logits, seq_len):
