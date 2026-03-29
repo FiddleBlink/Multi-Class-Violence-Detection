@@ -70,17 +70,17 @@ class Model(nn.Module):
         n_class = args.num_classes
         
         self.online_mode = args.online_mode
-        self.max_seqlen = getattr(args, 'max_seqlen', 200)
+        self.max_seqlen = args.max_seqlen
 
-        # Feature projection (simple linear fusion of RGB + Audio)
-        self.fusion = nn.Linear(n_features, 256)
-        self.bn_initial = nn.BatchNorm1d(256)
+        # # Feature projection (simple linear fusion of RGB + Audio)
+        # self.fusion = nn.Linear(n_features, 256)
+        # self.bn_initial = nn.BatchNorm1d(256)
         
-        # Positional encoding for temporal awareness
-        self.pos_encoding = PositionalEncoding(256, self.max_seqlen)
+        # # Positional encoding for temporal awareness
+        # self.pos_encoding = PositionalEncoding(256, self.max_seqlen)
         
         # Main feature extraction pipeline (from XD-Violence)
-        self.conv1d1 = nn.Conv1d(in_channels=256, out_channels=512, kernel_size=1, padding=0)
+        self.conv1d1 = nn.Conv1d(in_channels=n_features, out_channels=512, kernel_size=1, padding=0)
         self.bn1 = nn.BatchNorm1d(512)
         
         self.conv1d2 = nn.Conv1d(in_channels=512, out_channels=256, kernel_size=1, padding=0)
@@ -93,23 +93,23 @@ class Model(nn.Module):
         self.bn4 = nn.BatchNorm1d(64)
         
         # Graph Convolution with 3 adjacency matrices (from XD-Violence paper)
-        self.gc1 = GraphConvolution(64, 64, residual=True)
+        self.gc1 = GraphConvolution(128, 64, residual=True)
         self.gc2 = GraphConvolution(64, 64, residual=True)
         self.gc_bn1 = nn.BatchNorm1d(64)
         self.gc_bn2 = nn.BatchNorm1d(64)
         
-        self.gc3 = GraphConvolution(64, 64, residual=True)
+        self.gc3 = GraphConvolution(128, 64, residual=True)
         self.gc4 = GraphConvolution(64, 64, residual=True)
         self.gc_bn3 = nn.BatchNorm1d(64)
         self.gc_bn4 = nn.BatchNorm1d(64)
         
-        self.gc5 = GraphConvolution(64, 64, residual=True)
+        self.gc5 = GraphConvolution(128, 64, residual=True)
         self.gc6 = GraphConvolution(64, 64, residual=True)
         self.gc_bn5 = nn.BatchNorm1d(64)
         self.gc_bn6 = nn.BatchNorm1d(64)
         
         # Adjacency matrix generation
-        self.simAdj = SimilarityAdj(256, 32)
+        self.simAdj = SimilarityAdj(n_features, 32)
         self.disAdj = DistanceAdj()
 
         # Simplified classifier (2-layer MLP)
@@ -123,11 +123,12 @@ class Model(nn.Module):
         
         # Simplified approximator network (2-layer)
         self.approximator = nn.Sequential(
-            nn.Conv1d(64, 64, 3, padding=1),
+            nn.Conv1d(128, 64, 1, padding=0),
             nn.BatchNorm1d(64),
             nn.ReLU(),
             nn.Dropout(0.3),
-            nn.Conv1d(64, 32, 1, padding=0)
+            nn.Conv1d(64, 32, 1, padding=0),
+            nn.ReLU()
         )
         
         self.conv1d_approximator = nn.Conv1d(32, 1, 3, padding=1)
@@ -141,15 +142,16 @@ class Model(nn.Module):
         self.apply(weight_init)
 
     def forward(self, inputs, seq_len):
-        # Feature projection (fusion of RGB + Audio features)
-        x = self.fusion(inputs)  # (B, T, 256) - simple linear projection
-        x = x.permute(0, 2, 1)  # (B, 256, T)
-        x = self.bn_initial(x)
-        x = x.permute(0, 2, 1)  # (B, T, 256)
+        # # Feature projection (fusion of RGB + Audio features)
+        # x = self.fusion(inputs)  # (B, T, 256) - simple linear projection
+        # x = x.permute(0, 2, 1)  # (B, 256, T)
+        # x = self.bn_initial(x)
+        # x = x.permute(0, 2, 1)  # (B, T, 256)
         
-        # Add positional encoding for temporal awareness
-        x = self.pos_encoding(x)
-        x = x.permute(0, 2, 1)  # (B, 256, T) for conv1d
+        # # Add positional encoding for temporal awareness
+        # x = self.pos_encoding(x)
+        x = inputs.permute(0, 2, 1)  # (B, 256, T) for conv1d
+        
 
         # Feature extraction (from XD-Violence paper)
         x = self.relu(self.bn1(self.conv1d1(x)))
@@ -161,8 +163,8 @@ class Model(nn.Module):
         x = self.relu(self.bn3(self.conv1d3(x)))
         x = self.dropout_light(x)
         
-        x = self.relu(self.bn4(self.conv1d4(x)))
-        x = self.dropout_light(x)
+        # x = self.relu(self.bn4(self.conv1d4(x)))
+        # x = self.dropout_light(x)
 
         # Anomaly score approximation
         logits = self.approximator(x)

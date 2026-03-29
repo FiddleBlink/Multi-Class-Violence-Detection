@@ -6,15 +6,22 @@ from tqdm import tqdm
 
 def CLAS(logits, label, seq_len, criterion, device, sample_weights=None, is_topk=True):
     """Classification loss for multi-class violence detection"""
-    logits = logits.squeeze()
-    instance_logits = torch.zeros(7).to(device)
+    # logits: (B, T, C)
     outx = []
     for i in range(logits.shape[0]):
-        if is_topk:
-            weights = torch.softmax(logits[i][:seq_len[i]] / 0.5, dim=0)  # temperature
-            tmp = torch.sum(weights * logits[i][:seq_len[i]], dim=0)
+        n = int(seq_len[i].item()) if isinstance(seq_len[i], torch.Tensor) else int(seq_len[i])
+        if n <= 0:
+            # fallback to the entire sequence, if invalid seq_len
+            n = logits.shape[1]
+        valid = logits[i, :n, :]
+        if valid.numel() == 0:
+            tmp = torch.zeros(logits.size(-1), device=device)
+        elif is_topk:
+            k = max(1, min(int(n // 16 + 1), n))
+            topk_vals, _ = torch.topk(valid, k=k, dim=0, largest=True)
+            tmp = topk_vals.mean(dim=0)
         else:
-            tmp = torch.mean(logits[i][:seq_len[i]], dim=0)
+            tmp = valid.mean(dim=0)
         outx.append(tmp)
     instance_logits = torch.stack(outx)
 
@@ -27,19 +34,27 @@ def CLAS(logits, label, seq_len, criterion, device, sample_weights=None, is_topk
 
 def CLAS2(logits, label, seq_len, criterion, device, is_topk=True):
     """Binary classification loss for violence detection"""
-    logits = logits.squeeze()
+    # logits: (B, T) or (B, T, 1)
+    if logits.dim() == 3 and logits.size(2) == 1:
+        logits = logits.squeeze(2)
+
     outx = []
     for i in range(logits.shape[0]):
-        if is_topk:
-            # Aggregate multi-class logits to binary using weighted combination
-            weights = torch.softmax(logits[i][:seq_len[i]] / 0.5, dim=0)  # temperature
-            tmp = torch.mean(torch.sum(weights * logits[i][:seq_len[i]], dim=1))  # Average over classes
+        n = int(seq_len[i].item()) if isinstance(seq_len[i], torch.Tensor) else int(seq_len[i])
+        if n <= 0:
+            n = logits.shape[1]
+        valid = logits[i, :n]
+        if valid.numel() == 0:
+            tmp = torch.tensor(0.0, device=device)
+        elif is_topk:
+            k = max(1, min(int(n // 16 + 1), n))
+            topk_vals, _ = torch.topk(valid, k=k, dim=0, largest=True)
+            tmp = topk_vals.mean()
         else:
-            # Simple mean aggregation
-            tmp = torch.mean(logits[i, :seq_len[i]])
+            tmp = valid.mean()
         outx.append(tmp)
-    
     instance_logits = torch.stack(outx)
+    
     instance_logits = torch.sigmoid(instance_logits)
     clsloss = criterion(instance_logits, label.float())
     return clsloss
@@ -51,24 +66,32 @@ def CENTROPY(logits, logits2, seq_len, device, online_mode, sample_weights=None)
 
     if online_mode == 'Binary':
         for i in range(logits.shape[0]):
-            tmp1 = torch.softmax(logits[i, :seq_len[i]], dim=0)
-            tmp1 = torch.mean(tmp1, dim=1)
-            tmp1 = tmp1.squeeze()
-            tmp2 = torch.softmax(logits2[i, :seq_len[i]], dim=0).squeeze()
-            crosOut = -torch.mean(tmp1.detach() * torch.log(tmp2 + 1e-8))
+            n = int(seq_len[i].item()) if isinstance(seq_len[i], torch.Tensor) else int(seq_len[i])
+            if n <= 0:
+                n = logits.shape[1]
+            valid1 = logits[i, :n] if logits.dim() > 1 else logits[i]
+            valid2 = logits2[i, :n] if logits2.dim() > 1 else logits2[i]
+            if valid1.dim() == 1:
+                p1 = torch.softmax(valid1, dim=0)
+                p2 = torch.softmax(valid2, dim=0)
+            else:
+                p1 = torch.softmax(valid1, dim=1).mean(dim=0)
+                p2 = torch.softmax(valid2, dim=1).mean(dim=0)
+            crosOut = -torch.sum(p1.detach() * torch.log(p2 + 1e-8))
             if sample_weights is not None:
                 instance_logits += crosOut * sample_weights[i]
             else:
                 instance_logits += crosOut
     elif online_mode == 'Multi':
         for i in range(logits.shape[0]):
-            tmp1 = torch.softmax(logits[i, :seq_len[i]], dim=0)
-            tmp1 = torch.mean(tmp1, dim=1)
-            tmp1 = tmp1.squeeze()
-            tmp2 = torch.softmax(logits2[i, :seq_len[i]], dim=0)
-            tmp2 = torch.mean(tmp2, dim=1)
-            tmp2 = tmp2.squeeze()
-            crosOut = -torch.mean(tmp1.detach() * torch.log(tmp2 + 1e-8))
+            n = int(seq_len[i].item()) if isinstance(seq_len[i], torch.Tensor) else int(seq_len[i])
+            if n <= 0:
+                n = logits.shape[1]
+            valid1 = logits[i, :n]
+            valid2 = logits2[i, :n]
+            p1 = torch.softmax(valid1, dim=1).mean(dim=0)
+            p2 = torch.softmax(valid2, dim=1).mean(dim=0)
+            crosOut = -torch.sum(p1.detach() * torch.log(p2 + 1e-8))
             if sample_weights is not None:
                 instance_logits += crosOut * sample_weights[i]
             else:

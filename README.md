@@ -26,5 +26,5 @@ Thanks for your attention!
   pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 --extra-index-url https://download.pytorch.org/whl/cu118
 - set the customizations in options.py
 - run this code to get started: 
-  python main.py --seed 42 --lr 0.0001 --batch-size 128 --max-epoch 50 --grad-clip 1.0 
+  python main.py --seed 42 --lr 0.001 --batch-size 64 --max-epoch 50 --grad-clip 1.0 
 

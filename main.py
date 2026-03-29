@@ -42,28 +42,9 @@ if __name__ == '__main__':
     # Setup class weights if using inverse weighting
     class_weights = None
     if args.weights == 'Inverse':
-        logging.info('Computing inverse class weights...')
-        train_data_all = DataLoader(Dataset(args, test_mode=False), batch_size=args.batch_size, shuffle=True)
-        all_labels = []
-
-        for i, (input, label) in enumerate(train_data_all):
-            all_labels.append(label)
-            if (i + 1) % 50 == 0:
-                logging.info(f'Processed {i + 1} batches for weight calculation')
-
-        all_labels = torch.cat(all_labels, dim=0)
-        logging.info(f'Total labels loaded: {all_labels.shape}')
-
-        torch_labels = torch.tensor(all_labels, dtype=torch.int64) 
-
-        # Calculate class frequencies
-        class_counts = torch.bincount(torch_labels)
-        logging.info(f'Class distribution: {class_counts.tolist()}')
-        
-        # Calculate inverse class frequencies
-        class_weights = 1.0 / class_counts.float()
-        # Normalize weights
-        class_weights /= class_weights.sum()
+        logging.info('Using pre-computed inverse class weights...')
+        # Pre-computed weights: [Normal, Fighting, Shooting, Explosion, Riot, Abuse, Car accident]
+        class_weights = torch.tensor([0.0116, 0.0538, 0.0711, 0.0763, 0.0627, 0.6636, 0.0608], dtype=torch.float32)
         logging.info(f'Class weights: {class_weights.tolist()}')
 
     # Create data loaders
@@ -176,7 +157,7 @@ if __name__ == '__main__':
             # Save model checkpoint every 2 epochs
             try:
                 if epoch % 2 == 0 and not epoch == 0:
-                    model_path = f'./ckpt/{args.model_name}{epoch}.pkl'
+                    model_path = f'./ckpt/{args.model_name}/{args.model_name}{epoch}.pkl'
                     torch.save(model.state_dict(), model_path)
                     logging.info(f'Model checkpoint saved: {model_path}')
             except Exception as e:
@@ -209,16 +190,16 @@ if __name__ == '__main__':
         logging.info('Training completed. Saving results...')
         
         try:
-            np.save(f'./ckpt/train_losses_{args.online_mode}_{args.weights}.npy', np.array(train_losses))
-            np.save(f'./ckpt/roc_auc_{args.online_mode}_{args.weights}.npy', np.array(roc_auc_arr))
-            np.save(f'./ckpt/f1_{args.online_mode}_{args.weights}.npy', np.array(f1_arr))
-            np.save(f'./ckpt/precision_{args.online_mode}_{args.weights}.npy', np.array(precision_arr))
-            np.save(f'./ckpt/recall_{args.online_mode}_{args.weights}.npy', np.array(recall_arr))
-            np.save(f'./ckpt/accuracy_{args.online_mode}_{args.weights}.npy', np.array(accuracy_arr))
-            np.save(f'./ckpt/mAP_{args.online_mode}_{args.weights}.npy', np.array(mAP_arr))
+            np.save(f'./ckpt/{args.model_name}/train_losses_{args.online_mode}_{args.weights}.npy', np.array(train_losses))
+            np.save(f'./ckpt/{args.model_name}/roc_auc_{args.online_mode}_{args.weights}.npy', np.array(roc_auc_arr))
+            np.save(f'./ckpt/{args.model_name}/f1_{args.online_mode}_{args.weights}.npy', np.array(f1_arr))
+            np.save(f'./ckpt/{args.model_name}/precision_{args.online_mode}_{args.weights}.npy', np.array(precision_arr))
+            np.save(f'./ckpt/{args.model_name}/recall_{args.online_mode}_{args.weights}.npy', np.array(recall_arr))
+            np.save(f'./ckpt/{args.model_name}/accuracy_{args.online_mode}_{args.weights}.npy', np.array(accuracy_arr))
+            np.save(f'./ckpt/{args.model_name}/mAP_{args.online_mode}_{args.weights}.npy', np.array(mAP_arr))
             
             # Save final model
-            torch.save(model.state_dict(), f'./ckpt/{args.model_name}.pkl')
+            torch.save(model.state_dict(), f'./ckpt/{args.model_name}/{args.model_name}.pkl')
             logging.info('All results saved successfully!')
             
         except Exception as e:

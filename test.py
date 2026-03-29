@@ -41,9 +41,15 @@ def test(dataloader, model, device, gt, online_mode='Binary', args=None):
                     # Forward pass with proper argument order
                     logits, logits2 = model(input_data, seq_len)
                     
-                    # Compute probabilities and predictions
+                    # Compute probabilities and predictions using actual seq_len (avoid padding haze)
                     probs = torch.softmax(logits, dim=2)  # dim=2 for (B, T, Classes)
-                    probs = torch.mean(probs, dim=1)  # Average over time dimension
+                    batch_probs = []
+                    for b in range(probs.shape[0]):
+                        length = int(seq_len[b].item())
+                        if length <= 0:
+                            length = probs.shape[1]
+                        batch_probs.append(probs[b, :length, :].mean(dim=0))
+                    probs = torch.stack(batch_probs, dim=0)
                     
                     pred = torch.argmax(probs, dim=1).float()
                     
@@ -69,7 +75,7 @@ def test(dataloader, model, device, gt, online_mode='Binary', args=None):
             
             # Repeat predictions to match ground truth length (for frame-level evaluation)
             # Each segment prediction is repeated to cover all frames in that segment
-            repeat_factor = len(gt) // len(all_preds) if len(all_preds) > 0 else 1
+            repeat_factor = int(np.ceil(len(gt) / len(all_preds))) if len(all_preds) > 0 else 1
             logging.info(f'Repeat factor for frame-level evaluation: {repeat_factor}')
             
             # Compute metrics
