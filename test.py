@@ -76,7 +76,7 @@ def test(dataloader, model, device, gt):
 			logging.info(f'\nClassification Report:\n{report}')
 			logging.info(f'\nConfusion Matrix:\n{cm}')
 
-			return roc_auc, f1, prec, recal, acc
+			return roc_auc, f1, prec, recal, acc, mAP
 		except Exception as e:
 			logging.error(f"[TEST] Critical error in test function: {str(e)}")
 			return 0.0, 0.0, 0.0, 0.0, 0.0, None

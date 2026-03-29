@@ -158,7 +158,7 @@ if __name__ == '__main__':
 				torch.save(model.state_dict(), './ckpt/'+args.model_name+'{}.pkl'.format(epoch))
 				logging.info(f'Model checkpoint saved')
 
-			roc_auc, f1, precision1, recall1, accuracy, mAP, cm = test(test_loader, model, device, gt)
+			roc_auc, f1, precision1, recall1, accuracy, mAP = test(test_loader, model, device, gt)
 			# print('Epoch {0}/{1}: offline roc_auc:{2:.4}'.format(epoch, args.max_epoch, roc_auc))
 			accuracy_arr.append(accuracy)
 			f1_arr.append(f1)
