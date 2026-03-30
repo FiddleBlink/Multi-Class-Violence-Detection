@@ -21,11 +21,13 @@ if __name__ == '__main__':
         {k.replace('module.', ''): v for k, v in torch.load('ckpt/Binary Inverse Adam/wsanodet_Adam_Binary_Inverse_50.pkl').items()})
     gt = np.load(args.gt)
     st = time.time()
-    pr_auc, f1, precision1, recall1, accuracy = test(test_loader, model, device, gt)
+    pr_auc, f1, precision1, recall1, accuracy, mAP, cm, report, avg_modality_drops, top_modalities = test(test_loader, model, device, gt, args.modality, args.feature_size)
     print('Time:{}'.format(time.time()-st))
     print('offline pr_auc:{0:.4}\n'.format(pr_auc))
     print('offline f1:{0:.4}\n'.format(f1))
     print(f'offline precision: {precision1}, offline Recall: {recall1}\n')
     print(f'Sklearn Accuracy Score: {accuracy}\n')
+    print(f'Modality contributions shape: {avg_modality_drops.shape}')
+    print(f'Top modality per class: {top_modalities}\n')
 
 

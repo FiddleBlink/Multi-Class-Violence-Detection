@@ -55,7 +55,7 @@ if __name__ == '__main__':
 	args = option.parser.parse_args()
 	
 	# Create checkpoint and logs directories, then setup logging
-	if not os.path.exists('./ckpt'):
+	if not os.path.exists(f'./ckpt/{args.model_name}'):
 		os.makedirs(f'./ckpt/{args.model_name}')
 	
 	log_dir = f'./ckpt/{args.model_name}/logs'
@@ -192,7 +192,7 @@ if __name__ == '__main__':
 				torch.save(model.state_dict(), f'./ckpt/{args.model_name}/'+args.model_name+'{}.pkl'.format(epoch))
 				logging.info(f'Model checkpoint saved')
 
-			roc_auc, f1, precision1, recall1, accuracy, mAP, cm ,report = test(test_loader, model, device, gt)
+			roc_auc, f1, precision1, recall1, accuracy, mAP, cm, report, avg_modality_drops, top_modalities = test(test_loader, model, device, gt, args.modality, args.feature_size)
 			# print('Epoch {0}/{1}: offline roc_auc:{2:.4}'.format(epoch, args.max_epoch, roc_auc))
 			accuracy_arr.append(accuracy)
 			f1_arr.append(f1)
@@ -202,6 +202,8 @@ if __name__ == '__main__':
 			mAP_arr.append(mAP)
 			cm_arr.append(cm)
 			report_arr.append(report)
+			logging.info(f'Per-category modality contribution matrix shape: {avg_modality_drops.shape}')
+			logging.info(f'Per-category top modality mapping: {top_modalities}')
 	
 			logging.info(f'\nTest Metrics:')
 			logging.info(f'  ROC AUC: {roc_auc:.4f}')
@@ -225,6 +227,8 @@ if __name__ == '__main__':
 		np.save(f'./ckpt/{args.model_name}/mAP_{args.scoring_mode}_{args.weights}.npy', np.array(mAP_arr))
 		np.save(f'./ckpt/{args.model_name}/cm_{args.scoring_mode}_{args.weights}.npy', np.array(cm_arr, dtype=object))
 		np.save(f'./ckpt/{args.model_name}/report_{args.scoring_mode}_{args.weights}.npy', np.array(report_arr, dtype=object))
+		np.save(f'./ckpt/{args.model_name}/modality_contribution_{args.scoring_mode}_{args.weights}.npy', avg_modality_drops)
+		np.save(f'./ckpt/{args.model_name}/modality_top_{args.scoring_mode}_{args.weights}.npy', np.array(top_modalities, dtype=object))
 
 		torch.save(model.state_dict(), f'./ckpt/{args.model_name}/' + args.model_name + '.pkl')
 	
