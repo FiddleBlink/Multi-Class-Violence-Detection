@@ -1,0 +1,220 @@
+[
+  {
+    "clip_name": "Casino.Royale.2006__#01-17-29_01-17-46_label_B1-0-0",
+    "batch_index": 0,
+    "num_frames": 25,
+    "duration_seconds": 16.67,
+    "predicted_classes": {
+      "Normal": 10,
+      "Fighting": 10,
+      "Shooting": 2,
+      "Abuse": 3
+    },
+    "cleaned_predicted_classes": {
+      "Normal": 10,
+      "Fighting": 10,
+      "Shooting": 1
+    },
+    "average_entropy": 1.2645165920257568,
+    "entropy_std": 0.20554912090301514,
+    "segments": [
+      {
+        "label_id": 2,
+        "label_name": "Shooting",
+        "start_time": 0.0,
+        "end_time": 1.33,
+        "duration": 1.33
+      },
+      {
+        "label_id": 0,
+        "label_name": "Normal",
+        "start_time": 1.33,
+        "end_time": 8.0,
+        "duration": 6.67
+      },
+      {
+        "label_id": 5,
+        "label_name": "Abuse",
+        "start_time": 8.0,
+        "end_time": 10.0,
+        "duration": 2.0
+      },
+      {
+        "label_id": 1,
+        "label_name": "Fighting",
+        "start_time": 10.0,
+        "end_time": 16.67,
+        "duration": 6.67
+      }
+    ],
+    "cleaned_segments": [
+      {
+        "label_id": 0,
+        "label_name": "Normal",
+        "start_time": 1.33,
+        "end_time": 8.0,
+        "duration": 6.67
+      },
+      {
+        "label_id": 1,
+        "label_name": "Fighting",
+        "start_time": 10.0,
+        "end_time": 16.67,
+        "duration": 6.67
+      }
+    ],
+    "dominant_modality_by_frame": [
+      "RGB",
+      "RGB",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "RGB",
+      "RGB",
+      "RGB",
+      "RGB",
+      "RGB",
+      "RGB",
+      "RGB",
+      "RGB",
+      "RGB",
+      "RGB",
+      "RGB",
+      "RGB",
+      "RGB"
+    ],
+    "dominant_modality_counts": {
+      "RGB": 15,
+      "AUDIO": 10
+    },
+    "dominant_modality_share": {
+      "RGB": 0.6,
+      "AUDIO": 0.4
+    },
+    "overall_modality_scores": {
+      "RGB": 0.1821826958656311,
+      "AUDIO": 0.24250024795532227
+    },
+    "overall_dominant_modality": "AUDIO",
+    "modality_names": [
+      "RGB",
+      "AUDIO"
+    ],
+    "raw_probs_shape": [
+      25,
+      7
+    ]
+  },
+  {
+    "clip_name": "Ip.Man.3.2015__#00-44-45_00-45-08_label_B1-0-0",
+    "batch_index": 1,
+    "num_frames": 34,
+    "duration_seconds": 22.67,
+    "predicted_classes": {
+      "Normal": 9,
+      "Fighting": 25
+    },
+    "cleaned_predicted_classes": {
+      "Normal": 9,
+      "Fighting": 25
+    },
+    "average_entropy": 0.6613063216209412,
+    "entropy_std": 0.5371460318565369,
+    "segments": [
+      {
+        "label_id": 1,
+        "label_name": "Fighting",
+        "start_time": 0.0,
+        "end_time": 16.67,
+        "duration": 16.67
+      },
+      {
+        "label_id": 0,
+        "label_name": "Normal",
+        "start_time": 16.67,
+        "end_time": 22.67,
+        "duration": 6.0
+      }
+    ],
+    "cleaned_segments": [
+      {
+        "label_id": 1,
+        "label_name": "Fighting",
+        "start_time": 0.0,
+        "end_time": 16.67,
+        "duration": 16.67
+      },
+      {
+        "label_id": 0,
+        "label_name": "Normal",
+        "start_time": 16.67,
+        "end_time": 22.67,
+        "duration": 6.0
+      }
+    ],
+    "dominant_modality_by_frame": [
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO",
+      "AUDIO"
+    ],
+    "dominant_modality_counts": {
+      "RGB": 0,
+      "AUDIO": 34
+    },
+    "dominant_modality_share": {
+      "RGB": 0.0,
+      "AUDIO": 1.0
+    },
+    "overall_modality_scores": {
+      "RGB": 0.17513651181669795,
+      "AUDIO": 0.4372556722339462
+    },
+    "overall_dominant_modality": "AUDIO",
+    "modality_names": [
+      "RGB",
+      "AUDIO"
+    ],
+    "raw_probs_shape": [
+      34,
+      7
+    ]
+  }
+]

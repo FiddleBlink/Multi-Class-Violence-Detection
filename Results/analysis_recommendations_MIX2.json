@@ -1,0 +1,19 @@
+{
+  "total_clips": 2,
+  "modalities": [
+    "RGB",
+    "AUDIO"
+  ],
+  "chosen_modality": "MIX2",
+  "feature_size": 1152,
+  "recommendations": [
+    "Report per-frame dominant modality using ablation drop values for the predicted class.",
+    "Use clip-level average modality dominance to compare which modality is most important for each category.",
+    "Include uncertainty metrics such as average entropy across frames.",
+    "Include predicted temporal segments and their duration distribution for each video.",
+    "Use modality frame share to demonstrate how often each modality influences decisions in a clip.",
+    "Compare raw predictions vs. cleaned predictions (>=3s segments) to show robustness to short false positives.",
+    "Analyze cleaned class distributions to understand dominant categories after filtering noise.",
+    "For MIX2 modality: Evaluate how well single modalities perform vs. multimodal combinations."
+  ]
+}

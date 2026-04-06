@@ -242,7 +242,7 @@ def run_analysis():
             print(f'  Segments: {len(predicted_segments)} | Cleaned segments: {len(cleaned_segments)}')
             print('')
 
-    output_path = os.path.join('.', f'analysis_results_{args.modality}.json')
+    output_path = os.path.join('./Results', f'analysis_results_{args.modality}.json')
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(analysis_results, f, indent=2)
 
@@ -262,7 +262,7 @@ def run_analysis():
             f'For {args.modality} modality: Evaluate how well single modalities perform vs. multimodal combinations.'
         ]
     }
-    summary_path = os.path.join('.', f'analysis_recommendations_{args.modality}.json')
+    summary_path = os.path.join('./Results', f'analysis_recommendations_{args.modality}.json')
     with open(summary_path, 'w', encoding='utf-8') as f:
         json.dump(summary, f, indent=2)
 
