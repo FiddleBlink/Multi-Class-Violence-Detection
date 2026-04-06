@@ -1,0 +1,3288 @@
+[INFO] === XDVioDet Training Started ===
+[INFO] Mode: Multi | Weights: Inverse | Optimizer: Adam
+[INFO] LR: 0.0001 | Batch Size: 128 | Max Epochs: 50
+[INFO] Logging to: ./ckpt/wsanodet_New_MIX2_v1.3_/logs
+[INFO] Device: cuda
+[INFO] Using inverse class weights: [1.        1.1216551 1.2287924 1.2640641 1.1746114 6.0676346 1.1627792]
+[INFO] Data loaders created | Train batches: 155 | Test batches: 800
+[INFO] Model loaded on cuda:0
+[INFO] Adam optimizer created | LR: 0.0001
+[INFO] Using weighted cross-entropy loss
+[INFO] Ground truth loaded: (2330384,)
+[INFO] 
+================================================================================
+[INFO] EPOCH 1/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 752.63s
+[INFO] [TRAIN] Average Loss: 2.8578
+[INFO] Epoch training completed in 752.63s | Loss: 2.8578
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [0. 0. 2. 2. 2. 2. 2. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 2. 2. 1.
+ 2. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.
+ 1. 1. 1. 1.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: RGB
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: AUDIO
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'RGB', 'RGB', 'AUDIO', 'AUDIO', 'AUDIO', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.8825
+[INFO]   mAP: 0.8684
+
+[INFO]   F1 Score: 0.6815
+[INFO]   Precision: 0.8542
+[INFO]   Recall: 0.6196
+[INFO]   Accuracy: 0.6196
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.98      0.57      0.72   1792579
+    Fighting       0.37      0.60      0.46    125428
+    Shooting       0.14      0.12      0.13     37114
+   Explosion       0.23      0.83      0.36     41542
+        Riot       0.62      0.92      0.74    272294
+       Abuse       0.01      0.42      0.02      3324
+Car accident       0.15      0.91      0.26     58103
+
+    accuracy                           0.62   2330384
+   macro avg       0.36      0.63      0.38   2330384
+weighted avg       0.85      0.62      0.68   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1025777  106801   21684   83052  140838  131418  283009]
+ [   9764   75648    5729   13029    7775   12223    1260]
+ [   1641   15292    4615   10792     193    1779    2802]
+ [    692    1453     494   34369    1769      10    2755]
+ [  10620    4472     259    5919  249162     278    1584]
+ [    546     638     551      46       0    1405     138]
+ [    912     240     396    2761     663     103   53028]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 2/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 737.52s
+[INFO] [TRAIN] Average Loss: 2.0392
+[INFO] Epoch training completed in 737.52s | Loss: 2.0392
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 2. 2. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 1.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: RGB
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: AUDIO
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'RGB', 'RGB', 'AUDIO', 'AUDIO', 'AUDIO', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.8925
+[INFO]   mAP: 0.8872
+
+[INFO]   F1 Score: 0.7603
+[INFO]   Precision: 0.8811
+[INFO]   Recall: 0.6960
+[INFO]   Accuracy: 0.6960
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.96      0.69      0.80   1792579
+    Fighting       0.56      0.53      0.54    125428
+    Shooting       0.34      0.28      0.31     37114
+   Explosion       0.18      0.96      0.31     41542
+        Riot       0.83      0.82      0.83    272294
+       Abuse       0.02      0.75      0.03      3324
+Car accident       0.19      0.84      0.31     58103
+
+    accuracy                           0.70   2330384
+   macro avg       0.44      0.70      0.45   2330384
+weighted avg       0.88      0.70      0.76   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1229467   39254   14020  135622   40771  127482  205963]
+ [  16930   66780    5215    9499    4105   22580     319]
+ [   1195    9082   10422   11922      90    2589    1814]
+ [    648     241     439   39923      59      16     216]
+ [  27629    4211     424   13406  224095     625    1904]
+ [    300      80     188     200       0    2508      48]
+ [   1063       0     396    7892       0      24   48728]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 3/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 735.14s
+[INFO] [TRAIN] Average Loss: 1.7172
+[INFO] Epoch training completed in 735.14s | Loss: 1.7172
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [2. 2. 2. 2. 2. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: AUDIO
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'AUDIO', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9247
+[INFO]   mAP: 0.8997
+
+[INFO]   F1 Score: 0.7273
+[INFO]   Precision: 0.8777
+[INFO]   Recall: 0.6708
+[INFO]   Accuracy: 0.6708
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.62      0.76   1792579
+    Fighting       0.43      0.71      0.54    125428
+    Shooting       0.20      0.52      0.29     37114
+   Explosion       0.22      0.89      0.35     41542
+        Riot       0.70      0.93      0.80    272294
+       Abuse       0.02      0.62      0.04      3324
+Car accident       0.19      0.88      0.31     58103
+
+    accuracy                           0.67   2330384
+   macro avg       0.39      0.74      0.44   2330384
+weighted avg       0.88      0.67      0.73   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1111687  107027   66049  110052   99905   85589  212270]
+ [   1555   88655    8945    2354    8158   14997     764]
+ [    920    5341   19467    7688     300    1472    1926]
+ [    164     135    1299   36791    1617       0    1536]
+ [   8800    3788     376    3985  253721     472    1152]
+ [    228     254     580      38       0    2054     170]
+ [    166       0     900    6052      75      24   50886]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 4/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 735.26s
+[INFO] [TRAIN] Average Loss: 1.4432
+[INFO] Epoch training completed in 735.26s | Loss: 1.4432
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [2. 2. 2. 2. 2. 2. 1. 1. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 1. 1. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9246
+[INFO]   mAP: 0.9053
+
+[INFO]   F1 Score: 0.7575
+[INFO]   Precision: 0.8875
+[INFO]   Recall: 0.7007
+[INFO]   Accuracy: 0.7007
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.66      0.79   1792579
+    Fighting       0.46      0.78      0.58    125428
+    Shooting       0.20      0.40      0.27     37114
+   Explosion       0.22      0.93      0.36     41542
+        Riot       0.78      0.88      0.83    272294
+       Abuse       0.02      0.70      0.04      3324
+Car accident       0.20      0.86      0.32     58103
+
+    accuracy                           0.70   2330384
+   macro avg       0.41      0.74      0.46   2330384
+weighted avg       0.89      0.70      0.76   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1190424   95312   51146  106483   61601   89199  198414]
+ [   2294   97840    3585    1277    3930   15832     670]
+ [   1033   11332   14744    6984      64    1495    1462]
+ [    231     256    1196   38524     351       0     984]
+ [  12233    6478     396   11797  239206     824    1360]
+ [    270     174     382       6       0    2316     176]
+ [    283       0    1271    6609       0      14   49926]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 5/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 736.50s
+[INFO] [TRAIN] Average Loss: 1.2372
+[INFO] Epoch training completed in 736.50s | Loss: 1.2372
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [2. 2. 2. 2. 2. 2. 1. 1. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 1. 1. 1. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 1. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9235
+[INFO]   mAP: 0.9067
+
+[INFO]   F1 Score: 0.7326
+[INFO]   Precision: 0.8879
+[INFO]   Recall: 0.6708
+[INFO]   Accuracy: 0.6708
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.62      0.76   1792579
+    Fighting       0.39      0.83      0.53    125428
+    Shooting       0.14      0.44      0.22     37114
+   Explosion       0.21      0.93      0.34     41542
+        Riot       0.82      0.86      0.84    272294
+       Abuse       0.02      0.60      0.04      3324
+Car accident       0.21      0.86      0.33     58103
+
+    accuracy                           0.67   2330384
+   macro avg       0.40      0.74      0.44   2330384
+weighted avg       0.89      0.67      0.73   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1117044  143496   88098  119559   47040   91143  186199]
+ [    975  104591    3666    1092    3118   11234     752]
+ [    559   12052   16149    5983      64     815    1492]
+ [     85     196    1303   38680     324       0     954]
+ [  11761    8867     406   13199  234622     735    2704]
+ [    160     526     459       0       0    2003     176]
+ [    520       0    1583    5919       0      22   50059]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 6/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 737.76s
+[INFO] [TRAIN] Average Loss: 1.1039
+[INFO] Epoch training completed in 737.76s | Loss: 1.1039
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 2. 2. 1. 1. 1. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 0. 0. 0. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9256
+[INFO]   mAP: 0.9124
+
+[INFO]   F1 Score: 0.7687
+[INFO]   Precision: 0.8933
+[INFO]   Recall: 0.7098
+[INFO]   Accuracy: 0.7098
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.98      0.67      0.80   1792579
+    Fighting       0.55      0.72      0.62    125428
+    Shooting       0.20      0.46      0.28     37114
+   Explosion       0.23      0.91      0.36     41542
+        Riot       0.80      0.90      0.85    272294
+       Abuse       0.02      0.80      0.03      3324
+Car accident       0.23      0.87      0.36     58103
+
+    accuracy                           0.71   2330384
+   macro avg       0.43      0.76      0.47   2330384
+weighted avg       0.89      0.71      0.77   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1209815   59341   61678  110323   56891  131460  163071]
+ [   5387   90146    2394     896    4146   21597     862]
+ [    790   10060   17236    5773      32    1650    1573]
+ [    107     128    1203   37666     943      56    1439]
+ [  11593    5399     294    5228  245924    1968    1888]
+ [     62     286     126       6       0    2652     192]
+ [    758       0    1341    5116       0     249   50639]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 7/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 736.09s
+[INFO] [TRAIN] Average Loss: 1.0164
+[INFO] Epoch training completed in 736.09s | Loss: 1.0164
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 3. 2. 1. 1. 1. 1. 1. 1. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 1. 1. 1. 1. 1. 1. 1. 1. 2. 2. 1. 1. 1.
+ 1. 1. 1. 1. 1. 1. 1. 2. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.
+ 1. 1. 1. 1.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9313
+[INFO]   mAP: 0.9113
+
+[INFO]   F1 Score: 0.7348
+[INFO]   Precision: 0.8823
+[INFO]   Recall: 0.6815
+[INFO]   Accuracy: 0.6815
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.63      0.77   1792579
+    Fighting       0.31      0.85      0.45    125428
+    Shooting       0.20      0.28      0.23     37114
+   Explosion       0.25      0.90      0.39     41542
+        Riot       0.78      0.91      0.84    272294
+       Abuse       0.03      0.67      0.06      3324
+Car accident       0.21      0.90      0.34     58103
+
+    accuracy                           0.68   2330384
+   macro avg       0.40      0.73      0.44   2330384
+weighted avg       0.88      0.68      0.73   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1131851  211666   37888   94896   66587   60181  189510]
+ [    885  107165    1157    1112    3134   11137     838]
+ [   1002   16718   10255    6148      48    1007    1936]
+ [    229     488     841   37425    1045       8    1506]
+ [   8002   10074      48    4768  246978     408    2016]
+ [    263     570      24       6       0    2221     240]
+ [    584     263    1147    3757       0      14   52338]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 8/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 736.91s
+[INFO] [TRAIN] Average Loss: 0.9527
+[INFO] Epoch training completed in 736.93s | Loss: 0.9527
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 2. 2. 2. 2. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 4. 0. 0. 0. 0. 0. 0. 0. 1. 0. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9408
+[INFO]   mAP: 0.9228
+
+[INFO]   F1 Score: 0.7945
+[INFO]   Precision: 0.8901
+[INFO]   Recall: 0.7536
+[INFO]   Accuracy: 0.7536
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.72      0.83   1792579
+    Fighting       0.55      0.77      0.64    125428
+    Shooting       0.25      0.61      0.36     37114
+   Explosion       0.27      0.89      0.41     41542
+        Riot       0.72      0.95      0.82    272294
+       Abuse       0.03      0.75      0.06      3324
+Car accident       0.26      0.80      0.40     58103
+
+    accuracy                           0.75   2330384
+   macro avg       0.44      0.79      0.50   2330384
+weighted avg       0.89      0.75      0.79   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1291158   67833   59773   89819   94284   63575  126137]
+ [   2730   96202    4087     877    5901   15169     462]
+ [   1151    5416   22620    4849     257    1326    1495]
+ [    189     119    1589   37119    1978      24     524]
+ [   5034    3699     422    2191  259964     520     464]
+ [    282     334      46       0       0    2492     170]
+ [   4352     317    1575    5001     160     110   46588]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 9/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 737.57s
+[INFO] [TRAIN] Average Loss: 0.8930
+[INFO] Epoch training completed in 737.57s | Loss: 0.8930
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 3. 2. 2. 2. 2. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 0. 0. 0. 0. 0. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9341
+[INFO]   mAP: 0.9194
+
+[INFO]   F1 Score: 0.7932
+[INFO]   Precision: 0.8939
+[INFO]   Recall: 0.7472
+[INFO]   Accuracy: 0.7472
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.72      0.83   1792579
+    Fighting       0.52      0.76      0.62    125428
+    Shooting       0.27      0.47      0.34     37114
+   Explosion       0.27      0.91      0.41     41542
+        Riot       0.77      0.93      0.84    272294
+       Abuse       0.02      0.76      0.05      3324
+Car accident       0.24      0.86      0.38     58103
+
+    accuracy                           0.75   2330384
+   macro avg       0.44      0.77      0.50   2330384
+weighted avg       0.89      0.75      0.79   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1284407   75387   42014   88745   69425   79626  152975]
+ [   2046   95850    2350     995    4864   18364     959]
+ [   1203    8357   17498    6238     160    1421    2237]
+ [    241     140    1093   37904     853       8    1303]
+ [   7523    4140      92    5305  252826    1160    1248]
+ [    324     126      94       0       0    2540     240]
+ [   2992     176    1211    3453       0      33   50238]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 10/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 737.92s
+[INFO] [TRAIN] Average Loss: 0.8627
+[INFO] Epoch training completed in 737.94s | Loss: 0.8627
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 2. 2. 2. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 1. 0. 0. 0. 0. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9397
+[INFO]   mAP: 0.9233
+
+[INFO]   F1 Score: 0.7883
+[INFO]   Precision: 0.8911
+[INFO]   Recall: 0.7466
+[INFO]   Accuracy: 0.7466
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.71      0.83   1792579
+    Fighting       0.48      0.83      0.61    125428
+    Shooting       0.21      0.57      0.31     37114
+   Explosion       0.26      0.88      0.41     41542
+        Riot       0.76      0.95      0.84    272294
+       Abuse       0.04      0.67      0.07      3324
+Car accident       0.25      0.85      0.39     58103
+
+    accuracy                           0.75   2330384
+   macro avg       0.43      0.78      0.49   2330384
+weighted avg       0.89      0.75      0.79   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1268385   98110   71226   89125   75781   47398  142554]
+ [   1587  104725    3433    1334    4399    9362     588]
+ [    863    7298   21132    4932      96     722    2071]
+ [    141      92    1380   36578    2218       0    1133]
+ [   5622    5109     188    2771  257516     304     784]
+ [    260     602       8       0       0    2230     224]
+ [   3318     320    1513    3564      70       0   49318]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 11/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 737.66s
+[INFO] [TRAIN] Average Loss: 0.8065
+[INFO] Epoch training completed in 737.66s | Loss: 0.8065
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 2. 2. 1. 1. 1. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9326
+[INFO]   mAP: 0.9210
+
+[INFO]   F1 Score: 0.7887
+[INFO]   Precision: 0.8960
+[INFO]   Recall: 0.7434
+[INFO]   Accuracy: 0.7434
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.71      0.82   1792579
+    Fighting       0.49      0.84      0.62    125428
+    Shooting       0.22      0.54      0.31     37114
+   Explosion       0.26      0.91      0.40     41542
+        Riot       0.80      0.92      0.86    272294
+       Abuse       0.04      0.69      0.07      3324
+Car accident       0.23      0.90      0.37     58103
+
+    accuracy                           0.74   2330384
+   macro avg       0.43      0.78      0.49   2330384
+weighted avg       0.90      0.74      0.79   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1264429   95357   66908   92953   56083   51411  165438]
+ [   1923  105285    2846    1324    3538    9719     793]
+ [    815    8003   19899    5183      80     672    2462]
+ [    125      34    1306   37650    1081       0    1346]
+ [   8273    5887     156    5632  250514     336    1496]
+ [    180     602      24       0       0    2278     240]
+ [   1023     144    1325    3242       0       0   52369]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 12/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 737.17s
+[INFO] [TRAIN] Average Loss: 0.8045
+[INFO] Epoch training completed in 737.17s | Loss: 0.8045
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 2. 2. 1. 1. 1. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9354
+[INFO]   mAP: 0.9220
+
+[INFO]   F1 Score: 0.7900
+[INFO]   Precision: 0.8943
+[INFO]   Recall: 0.7473
+[INFO]   Accuracy: 0.7473
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.71      0.83   1792579
+    Fighting       0.49      0.84      0.62    125428
+    Shooting       0.23      0.53      0.32     37114
+   Explosion       0.26      0.90      0.41     41542
+        Riot       0.78      0.93      0.85    272294
+       Abuse       0.04      0.64      0.07      3324
+Car accident       0.23      0.91      0.37     58103
+
+    accuracy                           0.75   2330384
+   macro avg       0.43      0.78      0.50   2330384
+weighted avg       0.89      0.75      0.79   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1269943   95666   61462   89368   66504   42360  167276]
+ [   1805  105306    2684    1392    4209    9119     913]
+ [    949    7816   19521    5363     144     636    2685]
+ [    149      50    1279   37199    1215       0    1650]
+ [   6853    4768     124    4317  254456     336    1440]
+ [    269     634      24       0       0    2125     272]
+ [    976     144    1146    2953       0       0   52884]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 13/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 738.74s
+[INFO] [TRAIN] Average Loss: 0.8027
+[INFO] Epoch training completed in 738.74s | Loss: 0.8027
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 2. 2. 1. 1. 1. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9320
+[INFO]   mAP: 0.9207
+
+[INFO]   F1 Score: 0.7887
+[INFO]   Precision: 0.8955
+[INFO]   Recall: 0.7429
+[INFO]   Accuracy: 0.7429
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.71      0.82   1792579
+    Fighting       0.47      0.84      0.61    125428
+    Shooting       0.23      0.54      0.32     37114
+   Explosion       0.26      0.91      0.40     41542
+        Riot       0.81      0.91      0.86    272294
+       Abuse       0.03      0.71      0.06      3324
+Car accident       0.24      0.88      0.38     58103
+
+    accuracy                           0.74   2330384
+   macro avg       0.43      0.79      0.49   2330384
+weighted avg       0.90      0.74      0.79   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1265392  102147   62611   94451   53218   60164  154596]
+ [   1684  105352    2494    1102    3090   11084     622]
+ [    853    7855   20132    5390      80     825    1979]
+ [     91      50    1330   37843    1045       8    1175]
+ [   9609    5962     204    5632  249111     464    1312]
+ [    212     538       2       0       0    2348     224]
+ [   1551     144    1435    3966       0       3   51004]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 14/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 737.64s
+[INFO] [TRAIN] Average Loss: 0.7947
+[INFO] Epoch training completed in 737.64s | Loss: 0.7947
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 2. 2. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9325
+[INFO]   mAP: 0.9211
+
+[INFO]   F1 Score: 0.7934
+[INFO]   Precision: 0.8963
+[INFO]   Recall: 0.7492
+[INFO]   Accuracy: 0.7492
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.71      0.83   1792579
+    Fighting       0.49      0.84      0.62    125428
+    Shooting       0.22      0.55      0.31     37114
+   Explosion       0.26      0.91      0.40     41542
+        Riot       0.82      0.91      0.86    272294
+       Abuse       0.04      0.68      0.07      3324
+Car accident       0.24      0.88      0.38     58103
+
+    accuracy                           0.75   2330384
+   macro avg       0.43      0.79      0.50   2330384
+weighted avg       0.90      0.75      0.79   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1280151   96403   68258   92481   52155   46374  156757]
+ [   1935  105432    3138    1334    3110    9841     638]
+ [    885    7434   20537    5371      80     700    2107]
+ [     99      50    1314   37832     981       0    1266]
+ [   9705    5903     156    6320  248458     384    1368]
+ [    253     570       8       0       0    2269     224]
+ [   1516     144    1453    3702       0       0   51288]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 15/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 737.69s
+[INFO] [TRAIN] Average Loss: 0.7901
+[INFO] Epoch training completed in 737.69s | Loss: 0.7901
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 1. 2. 1. 1. 1. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9361
+[INFO]   mAP: 0.9223
+
+[INFO]   F1 Score: 0.7938
+[INFO]   Precision: 0.8950
+[INFO]   Recall: 0.7517
+[INFO]   Accuracy: 0.7517
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.71      0.83   1792579
+    Fighting       0.50      0.84      0.63    125428
+    Shooting       0.23      0.53      0.32     37114
+   Explosion       0.26      0.91      0.40     41542
+        Riot       0.78      0.94      0.85    272294
+       Abuse       0.04      0.66      0.07      3324
+Car accident       0.24      0.89      0.38     58103
+
+    accuracy                           0.75   2330384
+   macro avg       0.43      0.78      0.50   2330384
+weighted avg       0.90      0.75      0.79   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1280860   91888   60440   93863   65441   42636  157451]
+ [   2037  104801    2487    1470    4458    9465     710]
+ [    933    7762   19658    5776     160     670    2155]
+ [     99      34    1263   37615    1199       0    1332]
+ [   6691    4065     108    4912  254854     400    1264]
+ [    301     602       8       0       0    2189     224]
+ [   1239     144    1284    3628       0       0   51808]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 16/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 737.27s
+[INFO] [TRAIN] Average Loss: 0.7828
+[INFO] Epoch training completed in 737.27s | Loss: 0.7828
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 1. 2. 1. 1. 1. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9362
+[INFO]   mAP: 0.9220
+
+[INFO]   F1 Score: 0.7888
+[INFO]   Precision: 0.8934
+[INFO]   Recall: 0.7461
+[INFO]   Accuracy: 0.7461
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.71      0.83   1792579
+    Fighting       0.47      0.84      0.61    125428
+    Shooting       0.23      0.54      0.32     37114
+   Explosion       0.26      0.91      0.40     41542
+        Riot       0.78      0.94      0.85    272294
+       Abuse       0.04      0.66      0.07      3324
+Car accident       0.24      0.87      0.38     58103
+
+    accuracy                           0.75   2330384
+   macro avg       0.43      0.78      0.49   2330384
+weighted avg       0.89      0.75      0.79   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1267344  105035   61946   93851   66029   45685  152689]
+ [   1607  105500    2632    1278    4223    9550     638]
+ [    933    7606   20180    5657     144     656    1938]
+ [    143      66    1279   37718    1199       0    1137]
+ [   6622    4167     124    4976  255029     384     992]
+ [    269     634       8       0       0    2189     224]
+ [   1754     144    1351    4136       0       0   50718]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 17/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 737.86s
+[INFO] [TRAIN] Average Loss: 0.7795
+[INFO] Epoch training completed in 737.86s | Loss: 0.7795
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 1. 2. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9336
+[INFO]   mAP: 0.9213
+
+[INFO]   F1 Score: 0.7942
+[INFO]   Precision: 0.8957
+[INFO]   Recall: 0.7507
+[INFO]   Accuracy: 0.7507
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.72      0.83   1792579
+    Fighting       0.49      0.84      0.62    125428
+    Shooting       0.23      0.55      0.32     37114
+   Explosion       0.26      0.92      0.41     41542
+        Riot       0.81      0.92      0.86    272294
+       Abuse       0.04      0.68      0.07      3324
+Car accident       0.24      0.88      0.38     58103
+
+    accuracy                           0.75   2330384
+   macro avg       0.44      0.79      0.50   2330384
+weighted avg       0.90      0.75      0.79   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1282719   97908   63397   91113   54613   48257  154572]
+ [   1984  105358    2827    1186    3475    9944     654]
+ [    997    7521   20307    5452     112     730    1995]
+ [    143      34    1298   38013     949       0    1105]
+ [   9590    4689     156    6608  249539     448    1264]
+ [    301     522       8       0       0    2269     224]
+ [   1514     144    1447    3772       0       0   51226]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 18/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 737.46s
+[INFO] [TRAIN] Average Loss: 0.7799
+[INFO] Epoch training completed in 737.46s | Loss: 0.7799
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 1. 2. 1. 1. 1. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9345
+[INFO]   mAP: 0.9222
+
+[INFO]   F1 Score: 0.7974
+[INFO]   Precision: 0.8954
+[INFO]   Recall: 0.7558
+[INFO]   Accuracy: 0.7558
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.72      0.83   1792579
+    Fighting       0.49      0.85      0.62    125428
+    Shooting       0.23      0.54      0.32     37114
+   Explosion       0.26      0.92      0.40     41542
+        Riot       0.80      0.92      0.86    272294
+       Abuse       0.04      0.63      0.08      3324
+Car accident       0.25      0.88      0.38     58103
+
+    accuracy                           0.76   2330384
+   macro avg       0.44      0.78      0.50   2330384
+weighted avg       0.90      0.76      0.80   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1292998   95633   61855   92072   57992   40412  151617]
+ [   2155  106451    2538    1330    3557    8775     622]
+ [    981    7919   19997    5486      96     576    2059]
+ [    131      34    1295   38044    1013       0    1025]
+ [   8811    4945     140    6176  250702     336    1184]
+ [    333     650       8       0       0    2109     224]
+ [   1711     144    1367    3804       0       0   51077]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 19/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 739.67s
+[INFO] [TRAIN] Average Loss: 0.7705
+[INFO] Epoch training completed in 739.68s | Loss: 0.7705
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 2. 2. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9351
+[INFO]   mAP: 0.9223
+
+[INFO]   F1 Score: 0.7922
+[INFO]   Precision: 0.8951
+[INFO]   Recall: 0.7491
+[INFO]   Accuracy: 0.7491
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.71      0.83   1792579
+    Fighting       0.50      0.84      0.63    125428
+    Shooting       0.22      0.57      0.32     37114
+   Explosion       0.27      0.91      0.42     41542
+        Riot       0.78      0.93      0.85    272294
+       Abuse       0.03      0.70      0.07      3324
+Car accident       0.24      0.88      0.38     58103
+
+    accuracy                           0.75   2330384
+   macro avg       0.44      0.79      0.50   2330384
+weighted avg       0.90      0.75      0.79   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1274593   92394   68054   86447   65354   52930  152807]
+ [   1908  104941    3019     949    3711   10328     572]
+ [    901    7420   21322    4739      64     736    1932]
+ [    151      50    1396   37875    1103       0     967]
+ [   6705    4849     252    5472  253512     432    1072]
+ [    260     506       8       0       0    2326     224]
+ [   1802     144    1629    3494       0       0   51034]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 20/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 749.33s
+[INFO] [TRAIN] Average Loss: 0.7676
+[INFO] Epoch training completed in 749.33s | Loss: 0.7676
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 1. 2. 1. 1. 1. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 3. 3. 3. 2. 2. 2. 2. 2.
+ 1. 1. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9360
+[INFO]   mAP: 0.9217
+
+[INFO]   F1 Score: 0.7842
+[INFO]   Precision: 0.8923
+[INFO]   Recall: 0.7415
+[INFO]   Accuracy: 0.7415
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.70      0.82   1792579
+    Fighting       0.47      0.85      0.60    125428
+    Shooting       0.24      0.51      0.32     37114
+   Explosion       0.25      0.91      0.40     41542
+        Riot       0.77      0.94      0.84    272294
+       Abuse       0.04      0.65      0.07      3324
+Car accident       0.24      0.90      0.38     58103
+
+    accuracy                           0.74   2330384
+   macro avg       0.43      0.78      0.49   2330384
+weighted avg       0.89      0.74      0.78   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1254622  107500   56722   95333   73087   44573  160742]
+ [   1559  106675    1991    1376    4063    8982     782]
+ [    965    8364   18817    5951     144     560    2313]
+ [    115      42    1211   37756    1199       0    1219]
+ [   5750    4289      60    5024  255635     368    1168]
+ [    285     650       8       0       0    2157     224]
+ [    944     144    1239    3504       0       0   52272]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 21/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 738.66s
+[INFO] [TRAIN] Average Loss: 0.7629
+[INFO] Epoch training completed in 738.66s | Loss: 0.7629
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 1. 2. 1. 1. 1. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 0. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9340
+[INFO]   mAP: 0.9220
+
+[INFO]   F1 Score: 0.7976
+[INFO]   Precision: 0.8958
+[INFO]   Recall: 0.7550
+[INFO]   Accuracy: 0.7550
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.72      0.83   1792579
+    Fighting       0.50      0.83      0.63    125428
+    Shooting       0.25      0.54      0.34     37114
+   Explosion       0.27      0.91      0.42     41542
+        Riot       0.80      0.93      0.86    272294
+       Abuse       0.03      0.74      0.07      3324
+Car accident       0.24      0.88      0.38     58103
+
+    accuracy                           0.76   2330384
+   macro avg       0.44      0.79      0.50   2330384
+weighted avg       0.90      0.76      0.80   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1292023   89768   55864   86423   60189   56536  151776]
+ [   2224  104440    2260     813    3461   11552     678]
+ [   1023    7755   19970    5228      96     857    2185]
+ [    159      42    1290   37709    1151       0    1191]
+ [   8306    4913     140    5352  251999     416    1168]
+ [    260     362       2       0       0    2476     224]
+ [   2213     144    1386    3435       0       3   50922]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 22/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 738.47s
+[INFO] [TRAIN] Average Loss: 0.7622
+[INFO] Epoch training completed in 738.47s | Loss: 0.7622
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 3. 2. 1. 1. 1. 1. 1. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9357
+[INFO]   mAP: 0.9221
+
+[INFO]   F1 Score: 0.7907
+[INFO]   Precision: 0.8942
+[INFO]   Recall: 0.7479
+[INFO]   Accuracy: 0.7479
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.71      0.83   1792579
+    Fighting       0.49      0.84      0.62    125428
+    Shooting       0.24      0.53      0.33     37114
+   Explosion       0.26      0.90      0.40     41542
+        Riot       0.78      0.94      0.85    272294
+       Abuse       0.04      0.70      0.07      3324
+Car accident       0.24      0.88      0.38     58103
+
+    accuracy                           0.75   2330384
+   macro avg       0.43      0.79      0.50   2330384
+weighted avg       0.89      0.75      0.79   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1271899   96414   57310   93356   68154   50575  154871]
+ [   1631  105308    2283    1360    3747   10391     708]
+ [    965    7572   19584    5812     144     772    2265]
+ [    127      34    1197   37555    1299       0    1330]
+ [   6308    4582      76    4864  254960     400    1104]
+ [    260     506       8       0       0    2326     224]
+ [   1802     144    1334    3565       0       0   51258]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 23/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 737.99s
+[INFO] [TRAIN] Average Loss: 0.7615
+[INFO] Epoch training completed in 737.99s | Loss: 0.7615
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 3. 2. 1. 1. 1. 1. 1. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 0. 0. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9343
+[INFO]   mAP: 0.9223
+
+[INFO]   F1 Score: 0.8050
+[INFO]   Precision: 0.8964
+[INFO]   Recall: 0.7646
+[INFO]   Accuracy: 0.7646
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.73      0.84   1792579
+    Fighting       0.51      0.84      0.63    125428
+    Shooting       0.25      0.52      0.34     37114
+   Explosion       0.27      0.90      0.42     41542
+        Riot       0.81      0.92      0.86    272294
+       Abuse       0.04      0.70      0.08      3324
+Car accident       0.24      0.88      0.38     58103
+
+    accuracy                           0.76   2330384
+   macro avg       0.44      0.79      0.51   2330384
+weighted avg       0.90      0.76      0.80   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1316297   90198   53327   85308   52807   42855  151787]
+ [   2529  105357    2279    1121    3028   10364     750]
+ [   1146    7552   19479    5572     144     784    2437]
+ [    207      34    1263   37525    1199       0    1314]
+ [  10635    4945     112    5236  249782     384    1200]
+ [    381     378       8       0       0    2333     224]
+ [   2517     160    1180    3286       0       0   50960]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 24/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 738.05s
+[INFO] [TRAIN] Average Loss: 0.7521
+[INFO] Epoch training completed in 738.05s | Loss: 0.7521
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 3. 2. 2. 2. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9356
+[INFO]   mAP: 0.9230
+
+[INFO]   F1 Score: 0.8073
+[INFO]   Precision: 0.8971
+[INFO]   Recall: 0.7677
+[INFO]   Accuracy: 0.7677
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.74      0.84   1792579
+    Fighting       0.54      0.83      0.65    125428
+    Shooting       0.24      0.55      0.33     37114
+   Explosion       0.26      0.92      0.40     41542
+        Riot       0.80      0.92      0.86    272294
+       Abuse       0.05      0.66      0.09      3324
+Car accident       0.25      0.87      0.39     58103
+
+    accuracy                           0.77   2330384
+   macro avg       0.45      0.78      0.51   2330384
+weighted avg       0.90      0.77      0.81   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1322845   78762   59279   92949   56914   33920  147910]
+ [   2777  104124    3435    1552    3617    9317     606]
+ [   1141    6764   20324    6091     144     648    2002]
+ [    159      34    1219   38370     997       0     763]
+ [   9396    3842     144    6824  250760     336     992]
+ [    397     474      34       0       0    2179     240]
+ [   2389     144    1213    3958       0       0   50399]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 25/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 738.49s
+[INFO] [TRAIN] Average Loss: 0.7506
+[INFO] Epoch training completed in 738.49s | Loss: 0.7506
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 2. 2. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9355
+[INFO]   mAP: 0.9230
+
+[INFO]   F1 Score: 0.8027
+[INFO]   Precision: 0.8972
+[INFO]   Recall: 0.7612
+[INFO]   Accuracy: 0.7612
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.73      0.84   1792579
+    Fighting       0.54      0.82      0.65    125428
+    Shooting       0.24      0.57      0.33     37114
+   Explosion       0.27      0.91      0.42     41542
+        Riot       0.79      0.93      0.86    272294
+       Abuse       0.04      0.73      0.07      3324
+Car accident       0.25      0.88      0.39     58103
+
+    accuracy                           0.76   2330384
+   macro avg       0.44      0.80      0.51   2330384
+weighted avg       0.90      0.76      0.80   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1304868   77517   61845   85269   61909   51003  150168]
+ [   2762  102677    3298     977    3863   11231     620]
+ [   1013    6656   21154    5265     144     873    2009]
+ [    191      34    1298   37911    1187       0     921]
+ [   7627    3602     224    5560  253889     496     896]
+ [    333     314      24       0       0    2429     224]
+ [   2150     144    1437    3466       0       0   50906]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 26/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 738.71s
+[INFO] [TRAIN] Average Loss: 0.7400
+[INFO] Epoch training completed in 738.71s | Loss: 0.7400
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 3. 2. 1. 1. 1. 1. 1. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9357
+[INFO]   mAP: 0.9224
+
+[INFO]   F1 Score: 0.7949
+[INFO]   Precision: 0.8952
+[INFO]   Recall: 0.7527
+[INFO]   Accuracy: 0.7527
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.72      0.83   1792579
+    Fighting       0.50      0.84      0.63    125428
+    Shooting       0.24      0.53      0.33     37114
+   Explosion       0.26      0.92      0.40     41542
+        Riot       0.79      0.93      0.85    272294
+       Abuse       0.04      0.69      0.07      3324
+Car accident       0.25      0.88      0.38     58103
+
+    accuracy                           0.75   2330384
+   macro avg       0.44      0.79      0.50   2330384
+weighted avg       0.90      0.75      0.79   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1283741   92881   55959   92720   64346   51021  151911]
+ [   2021  105444    2258    1147    3731   10205     622]
+ [   1013    7678   19496    6049     128     752    1998]
+ [    127      34    1267   38052    1219       0     843]
+ [   7209    4321     144    5356  254032     368     864]
+ [    292     490       8       0       0    2310     224]
+ [   1773     144    1252    3908       0       0   51026]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 27/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 738.21s
+[INFO] [TRAIN] Average Loss: 0.7396
+[INFO] Epoch training completed in 738.21s | Loss: 0.7396
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 1. 1. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9359
+[INFO]   mAP: 0.9232
+
+[INFO]   F1 Score: 0.8016
+[INFO]   Precision: 0.8965
+[INFO]   Recall: 0.7603
+[INFO]   Accuracy: 0.7603
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.73      0.84   1792579
+    Fighting       0.52      0.83      0.64    125428
+    Shooting       0.25      0.56      0.34     37114
+   Explosion       0.28      0.91      0.42     41542
+        Riot       0.79      0.93      0.86    272294
+       Abuse       0.04      0.73      0.07      3324
+Car accident       0.25      0.86      0.39     58103
+
+    accuracy                           0.76   2330384
+   macro avg       0.44      0.79      0.51   2330384
+weighted avg       0.90      0.76      0.80   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1302496   85988   58252   84754   60842   54056  146191]
+ [   2377  104247    2782     805    3573   11072     572]
+ [   1013    7032   20872    5254     128     825    1990]
+ [    159      34    1298   37993    1219       0     839]
+ [   7899    4369     208    5116  253454     416     832]
+ [    308     362       2       0       0    2428     224]
+ [   2660     160    1466    3582       0       3   50232]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 28/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 739.58s
+[INFO] [TRAIN] Average Loss: 0.7349
+[INFO] Epoch training completed in 739.58s | Loss: 0.7349
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 3. 2. 2. 2. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 3. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9351
+[INFO]   mAP: 0.9227
+
+[INFO]   F1 Score: 0.8050
+[INFO]   Precision: 0.8976
+[INFO]   Recall: 0.7643
+[INFO]   Accuracy: 0.7643
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.73      0.84   1792579
+    Fighting       0.54      0.83      0.65    125428
+    Shooting       0.23      0.57      0.33     37114
+   Explosion       0.24      0.93      0.39     41542
+        Riot       0.81      0.92      0.86    272294
+       Abuse       0.05      0.63      0.09      3324
+Car accident       0.25      0.87      0.39     58103
+
+    accuracy                           0.76   2330384
+   macro avg       0.44      0.78      0.51   2330384
+weighted avg       0.90      0.76      0.81   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1314765   79408   63404   99098   55399   34273  146232]
+ [   2634  104244    3826    1728    3622    8768     606]
+ [   1061    6239   20979    6127     160     514    2034]
+ [     99      18    1187   38622     997       0     619]
+ [   9550    3521     240    8089  249678     304     912]
+ [    381     554      56       0       0    2109     224]
+ [   1878     112    1236    4240       0       0   50637]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 29/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 738.63s
+[INFO] [TRAIN] Average Loss: 0.7302
+[INFO] Epoch training completed in 738.63s | Loss: 0.7302
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 3. 2. 1. 1. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 3. 0. 3. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9363
+[INFO]   mAP: 0.9231
+
+[INFO]   F1 Score: 0.7971
+[INFO]   Precision: 0.8964
+[INFO]   Recall: 0.7550
+[INFO]   Accuracy: 0.7550
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.72      0.83   1792579
+    Fighting       0.52      0.83      0.64    125428
+    Shooting       0.24      0.55      0.34     37114
+   Explosion       0.27      0.91      0.41     41542
+        Riot       0.79      0.94      0.85    272294
+       Abuse       0.03      0.69      0.07      3324
+Car accident       0.24      0.89      0.38     58103
+
+    accuracy                           0.75   2330384
+   macro avg       0.44      0.79      0.50   2330384
+weighted avg       0.90      0.75      0.80   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1287608   86656   59186   88228   64201   52192  154508]
+ [   2257  104541    2837     963    3710   10410     710]
+ [    965    6934   20584    5406     144     736    2345]
+ [    127      34    1263   37866    1283       0     969]
+ [   6979    3793     144    5228  254742     400    1008]
+ [    292     490       8       0       0    2310     224]
+ [   1548     144    1306    3349       0       0   51756]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 30/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 738.53s
+[INFO] [TRAIN] Average Loss: 0.7379
+[INFO] Epoch training completed in 738.53s | Loss: 0.7379
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 3. 2. 1. 2. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9354
+[INFO]   mAP: 0.9229
+
+[INFO]   F1 Score: 0.8024
+[INFO]   Precision: 0.8972
+[INFO]   Recall: 0.7613
+[INFO]   Accuracy: 0.7613
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.73      0.84   1792579
+    Fighting       0.52      0.83      0.64    125428
+    Shooting       0.24      0.56      0.34     37114
+   Explosion       0.28      0.91      0.42     41542
+        Riot       0.80      0.92      0.86    272294
+       Abuse       0.04      0.68      0.07      3324
+Car accident       0.24      0.89      0.38     58103
+
+    accuracy                           0.76   2330384
+   macro avg       0.44      0.79      0.51   2330384
+weighted avg       0.90      0.76      0.80   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1305217   86250   58051   83869   57946   44590  156656]
+ [   2464  104586    3125    1009    3377   10117     750]
+ [   1029    6639   20611    5342     144     752    2597]
+ [    143      34    1251   37692    1187       0    1235]
+ [   8483    4305     160    5968  251810     336    1232]
+ [    365     458       8       0       0    2269     224]
+ [   1675     144    1226    3096       0       0   51962]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 31/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 739.25s
+[INFO] [TRAIN] Average Loss: 0.7272
+[INFO] Epoch training completed in 739.25s | Loss: 0.7272
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 1. 1. 1. 1. 1. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 3. 3. 3. 2. 2. 2. 2. 2.
+ 1. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9377
+[INFO]   mAP: 0.9233
+
+[INFO]   F1 Score: 0.7965
+[INFO]   Precision: 0.8945
+[INFO]   Recall: 0.7564
+[INFO]   Accuracy: 0.7564
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.72      0.83   1792579
+    Fighting       0.49      0.85      0.62    125428
+    Shooting       0.24      0.53      0.33     37114
+   Explosion       0.27      0.90      0.42     41542
+        Riot       0.77      0.94      0.85    272294
+       Abuse       0.04      0.68      0.08      3324
+Car accident       0.25      0.89      0.39     58103
+
+    accuracy                           0.76   2330384
+   macro avg       0.44      0.79      0.50   2330384
+weighted avg       0.89      0.76      0.80   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1289066   96367   56963   86654   69131   42088  152310]
+ [   1942  106206    2220    1220    3717    9495     628]
+ [    997    7758   19822    5602     160     644    2131]
+ [    111      42    1272   37375    1603       0    1139]
+ [   6124    4193      96    4172  256413     304     992]
+ [    333     490       8       0       0    2253     240]
+ [   1715     144    1283    3409       0       0   51552]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 32/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 738.50s
+[INFO] [TRAIN] Average Loss: 0.7215
+[INFO] Epoch training completed in 738.50s | Loss: 0.7215
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 1. 1. 1. 1. 1. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 0. 3. 3. 3. 2. 2. 2. 2. 2.
+ 1. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9357
+[INFO]   mAP: 0.9226
+
+[INFO]   F1 Score: 0.7936
+[INFO]   Precision: 0.8947
+[INFO]   Recall: 0.7516
+[INFO]   Accuracy: 0.7516
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.71      0.83   1792579
+    Fighting       0.47      0.85      0.61    125428
+    Shooting       0.25      0.53      0.34     37114
+   Explosion       0.28      0.90      0.43     41542
+        Riot       0.79      0.93      0.85    272294
+       Abuse       0.04      0.70      0.07      3324
+Car accident       0.24      0.90      0.38     58103
+
+    accuracy                           0.75   2330384
+   macro avg       0.44      0.79      0.50   2330384
+weighted avg       0.89      0.75      0.79   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1280554  104966   54831   83148   61974   49781  157325]
+ [   1932  106863    1912     909    3021   10095     696]
+ [    949    8065   19664    5151     128     688    2469]
+ [    127      42    1274   37516    1267       0    1316]
+ [   7686    5158      80    5328  252538     336    1168]
+ [    276     490       2       0       0    2332     224]
+ [   1692     160    1293    2908       0       0   52050]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 33/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 738.58s
+[INFO] [TRAIN] Average Loss: 0.7163
+[INFO] Epoch training completed in 738.58s | Loss: 0.7163
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 3. 2. 1. 2. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 3. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9353
+[INFO]   mAP: 0.9228
+
+[INFO]   F1 Score: 0.8053
+[INFO]   Precision: 0.8966
+[INFO]   Recall: 0.7656
+[INFO]   Accuracy: 0.7656
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.73      0.84   1792579
+    Fighting       0.50      0.85      0.63    125428
+    Shooting       0.24      0.56      0.34     37114
+   Explosion       0.28      0.91      0.43     41542
+        Riot       0.81      0.92      0.86    272294
+       Abuse       0.04      0.68      0.08      3324
+Car accident       0.25      0.88      0.39     58103
+
+    accuracy                           0.77   2330384
+   macro avg       0.45      0.79      0.51   2330384
+weighted avg       0.90      0.77      0.81   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1316810   92402   58649   81210   53828   39824  149856]
+ [   2499  106074    2690     967    2961    9541     696]
+ [   1029    7063   20687    5084     128     622    2501]
+ [    191      34    1256   37831    1171       0    1059]
+ [  10285    4993     112    6192  249256     320    1136]
+ [    365     474       8       0       0    2253     224]
+ [   2309     144    1334    3004       0       0   51312]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 34/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 737.91s
+[INFO] [TRAIN] Average Loss: 0.7151
+[INFO] Epoch training completed in 737.91s | Loss: 0.7151
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 3. 2. 1. 2. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 3. 0. 3. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9354
+[INFO]   mAP: 0.9233
+
+[INFO]   F1 Score: 0.8084
+[INFO]   Precision: 0.8974
+[INFO]   Recall: 0.7685
+[INFO]   Accuracy: 0.7685
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.74      0.85   1792579
+    Fighting       0.53      0.84      0.65    125428
+    Shooting       0.25      0.56      0.34     37114
+   Explosion       0.27      0.92      0.42     41542
+        Riot       0.81      0.92      0.86    272294
+       Abuse       0.04      0.71      0.07      3324
+Car accident       0.25      0.87      0.39     58103
+
+    accuracy                           0.77   2330384
+   macro avg       0.45      0.79      0.51   2330384
+weighted avg       0.90      0.77      0.81   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1325077   82122   57158   85916   53756   45629  142921]
+ [   2771  104817    2795     995    3022   10400     628]
+ [   1061    6968   20678    5182     112     768    2345]
+ [    207      18    1256   38111    1171       0     779]
+ [  10354    4689     176    6112  249651     368     944]
+ [    387     378       2       0       0    2355     202]
+ [   2847     144    1343    3476       0       0   50293]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 35/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 685.68s
+[INFO] [TRAIN] Average Loss: 0.7109
+[INFO] Epoch training completed in 685.68s | Loss: 0.7109
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 3. 2. 1. 1. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9377
+[INFO]   mAP: 0.9238
+
+[INFO]   F1 Score: 0.8005
+[INFO]   Precision: 0.8951
+[INFO]   Recall: 0.7611
+[INFO]   Accuracy: 0.7611
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.73      0.84   1792579
+    Fighting       0.51      0.85      0.64    125428
+    Shooting       0.25      0.54      0.34     37114
+   Explosion       0.27      0.91      0.42     41542
+        Riot       0.78      0.94      0.85    272294
+       Abuse       0.04      0.66      0.07      3324
+Car accident       0.25      0.89      0.39     58103
+
+    accuracy                           0.76   2330384
+   macro avg       0.44      0.79      0.51   2330384
+weighted avg       0.90      0.76      0.80   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1300205   90293   55524   87060   67497   43154  148846]
+ [   2434  106013    2325    1049    3877    9003     727]
+ [   1061    7313   20001    5486     176     598    2479]
+ [     70      34    1195   37821    1427       0     995]
+ [   7170    3585      64    4468  255823     320     864]
+ [    333     570       8       0       0    2189     224]
+ [   1895     144    1251    3140       0       0   51673]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 36/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 166.75s
+[INFO] [TRAIN] Average Loss: 0.7044
+[INFO] Epoch training completed in 166.75s | Loss: 0.7044
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 3. 2. 1. 1. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 3. 0. 3. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9355
+[INFO]   mAP: 0.9225
+
+[INFO]   F1 Score: 0.7944
+[INFO]   Precision: 0.8947
+[INFO]   Recall: 0.7532
+[INFO]   Accuracy: 0.7532
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.72      0.83   1792579
+    Fighting       0.48      0.85      0.62    125428
+    Shooting       0.24      0.53      0.33     37114
+   Explosion       0.28      0.89      0.43     41542
+        Riot       0.79      0.93      0.85    272294
+       Abuse       0.04      0.65      0.07      3324
+Car accident       0.24      0.91      0.38     58103
+
+    accuracy                           0.75   2330384
+   macro avg       0.44      0.78      0.50   2330384
+weighted avg       0.89      0.75      0.79   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1282786  102056   57871   80852   63097   43349  162568]
+ [   2004  107094    2190     849    3226    9096     969]
+ [    933    7568   19738    5272     160     614    2829]
+ [    102      34    1195   37039    1395       0    1777]
+ [   7942    4598      80    4784  253338     288    1264]
+ [    317     586       8       0       0    2173     240]
+ [   1356     144    1190    2388       0       0   53025]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 37/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 177.57s
+[INFO] [TRAIN] Average Loss: 0.7060
+[INFO] Epoch training completed in 177.57s | Loss: 0.7060
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 3. 2. 1. 2. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 3. 0. 3. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9356
+[INFO]   mAP: 0.9229
+
+[INFO]   F1 Score: 0.8077
+[INFO]   Precision: 0.8970
+[INFO]   Recall: 0.7678
+[INFO]   Accuracy: 0.7678
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.74      0.84   1792579
+    Fighting       0.52      0.83      0.64    125428
+    Shooting       0.25      0.57      0.35     37114
+   Explosion       0.28      0.91      0.42     41542
+        Riot       0.81      0.92      0.86    272294
+       Abuse       0.04      0.73      0.08      3324
+Car accident       0.25      0.87      0.39     58103
+
+    accuracy                           0.77   2330384
+   macro avg       0.45      0.80      0.51   2330384
+weighted avg       0.90      0.77      0.81   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1323053   84434   58712   83889   53927   45181  143383]
+ [   2555  104124    3118     983    3123   10862     663]
+ [   1061    6405   21255    5086     160     786    2361]
+ [    175      34    1298   37923    1235       0     877]
+ [  10626    3969     224    6080  250099     400     896]
+ [    387     298       2       0       0    2435     202]
+ [   3007     160    1327    3319       0       0   50290]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 38/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 207.61s
+[INFO] [TRAIN] Average Loss: 0.6985
+[INFO] Epoch training completed in 207.61s | Loss: 0.6985
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 1. 1. 1. 1. 1. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 3. 0. 3. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9350
+[INFO]   mAP: 0.9220
+
+[INFO]   F1 Score: 0.7950
+[INFO]   Precision: 0.8960
+[INFO]   Recall: 0.7521
+[INFO]   Accuracy: 0.7521
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.72      0.83   1792579
+    Fighting       0.49      0.84      0.62    125428
+    Shooting       0.25      0.56      0.34     37114
+   Explosion       0.27      0.91      0.42     41542
+        Riot       0.80      0.92      0.86    272294
+       Abuse       0.04      0.74      0.07      3324
+Car accident       0.24      0.90      0.38     58103
+
+    accuracy                           0.75   2330384
+   macro avg       0.44      0.80      0.50   2330384
+weighted avg       0.90      0.75      0.79   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1282839   98199   57414   86670   58088   51863  157506]
+ [   1928  105185    2507     873    3089   11117     729]
+ [    949    6982   20661    5137     160     784    2441]
+ [     54      34    1282   37894    1299       0     979]
+ [   8644    4198     112    6120  251652     384    1184]
+ [    308     330       2       0       0    2460     224]
+ [   1550     144    1286    3114       0       0   52009]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 39/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 249.49s
+[INFO] [TRAIN] Average Loss: 0.7018
+[INFO] Epoch training completed in 249.50s | Loss: 0.7018
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 1. 2. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 3. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9356
+[INFO]   mAP: 0.9231
+
+[INFO]   F1 Score: 0.8032
+[INFO]   Precision: 0.8973
+[INFO]   Recall: 0.7621
+[INFO]   Accuracy: 0.7621
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.73      0.84   1792579
+    Fighting       0.51      0.84      0.64    125428
+    Shooting       0.24      0.58      0.34     37114
+   Explosion       0.28      0.91      0.43     41542
+        Riot       0.81      0.92      0.86    272294
+       Abuse       0.04      0.73      0.07      3324
+Car accident       0.25      0.88      0.39     58103
+
+    accuracy                           0.76   2330384
+   macro avg       0.44      0.80      0.51   2330384
+weighted avg       0.90      0.76      0.80   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1307198   88931   63283   83682   54551   47746  147188]
+ [   2307  105204    2958     833    3043   10463     620]
+ [    981    6812   21445    4783     112     732    2249]
+ [     70      34    1314   37948    1267       0     909]
+ [   9530    4417     192    6088  250627     368    1072]
+ [    317     346      18       0       0    2435     208]
+ [   2317     144    1446    3178       0       0   51018]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 40/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 264.72s
+[INFO] [TRAIN] Average Loss: 0.6872
+[INFO] Epoch training completed in 264.72s | Loss: 0.6872
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 3. 2. 1. 1. 1. 1. 1. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9358
+[INFO]   mAP: 0.9227
+
+[INFO]   F1 Score: 0.7963
+[INFO]   Precision: 0.8961
+[INFO]   Recall: 0.7539
+[INFO]   Accuracy: 0.7539
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.72      0.83   1792579
+    Fighting       0.51      0.84      0.63    125428
+    Shooting       0.26      0.53      0.34     37114
+   Explosion       0.28      0.90      0.42     41542
+        Riot       0.79      0.93      0.85    272294
+       Abuse       0.03      0.74      0.07      3324
+Car accident       0.24      0.91      0.38     58103
+
+    accuracy                           0.75   2330384
+   macro avg       0.44      0.79      0.50   2330384
+weighted avg       0.90      0.75      0.80   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1285822   91051   52882   83975   63279   56412  159158]
+ [   2144  104986    1710     777    3346   11464    1001]
+ [    981    7342   19524    5494     160     800    2813]
+ [     86      34    1152   37354    1395       0    1521]
+ [   7705    3953      80    5024  253852     432    1248]
+ [    260     378       2       0       0    2460     224]
+ [   1434      96    1114    2512       0      16   52931]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 41/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 258.47s
+[INFO] [TRAIN] Average Loss: 0.6904
+[INFO] Epoch training completed in 258.47s | Loss: 0.6904
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 1. 2. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 3. 0. 3. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9350
+[INFO]   mAP: 0.9227
+
+[INFO]   F1 Score: 0.8030
+[INFO]   Precision: 0.8970
+[INFO]   Recall: 0.7625
+[INFO]   Accuracy: 0.7625
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.73      0.84   1792579
+    Fighting       0.51      0.84      0.64    125428
+    Shooting       0.24      0.56      0.34     37114
+   Explosion       0.29      0.91      0.43     41542
+        Riot       0.80      0.92      0.86    272294
+       Abuse       0.04      0.73      0.08      3324
+Car accident       0.24      0.90      0.38     58103
+
+    accuracy                           0.76   2330384
+   macro avg       0.45      0.80      0.51   2330384
+weighted avg       0.90      0.76      0.80   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1307325   88223   60850   79841   57465   43122  155753]
+ [   2435  105312    2719     809    2993   10335     825]
+ [    981    6767   20917    4944     112     732    2661]
+ [    150      34    1282   37625    1267       0    1184]
+ [   9197    4406     208    5920  251059     336    1168]
+ [    333     346       2       0       0    2419     224]
+ [   1707     144    1302    2685       0       0   52265]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 42/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 258.94s
+[INFO] [TRAIN] Average Loss: 0.6841
+[INFO] Epoch training completed in 258.95s | Loss: 0.6841
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 1. 1. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9349
+[INFO]   mAP: 0.9228
+
+[INFO]   F1 Score: 0.8012
+[INFO]   Precision: 0.8972
+[INFO]   Recall: 0.7597
+[INFO]   Accuracy: 0.7597
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.73      0.84   1792579
+    Fighting       0.51      0.84      0.64    125428
+    Shooting       0.24      0.56      0.34     37114
+   Explosion       0.28      0.91      0.43     41542
+        Riot       0.80      0.92      0.86    272294
+       Abuse       0.04      0.73      0.07      3324
+Car accident       0.25      0.89      0.39     58103
+
+    accuracy                           0.76   2330384
+   macro avg       0.44      0.80      0.51   2330384
+weighted avg       0.90      0.76      0.80   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1300422   88213   60880   83820   57420   48964  152860]
+ [   2316  105490    2486     857    3050   10452     777]
+ [    949    6860   20928    5000     112     748    2517]
+ [     54      34    1314   37843    1251       0    1046]
+ [   8942    4401     160    5920  251415     336    1120]
+ [    308     362       2       0       0    2428     224]
+ [   1809     144    1350    2864       0       0   51936]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 43/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 253.08s
+[INFO] [TRAIN] Average Loss: 0.6805
+[INFO] Epoch training completed in 253.08s | Loss: 0.6805
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 3. 2. 1. 2. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9368
+[INFO]   mAP: 0.9233
+
+[INFO]   F1 Score: 0.8064
+[INFO]   Precision: 0.8975
+[INFO]   Recall: 0.7657
+[INFO]   Accuracy: 0.7657
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.73      0.84   1792579
+    Fighting       0.53      0.82      0.65    125428
+    Shooting       0.25      0.57      0.35     37114
+   Explosion       0.27      0.92      0.42     41542
+        Riot       0.80      0.92      0.86    272294
+       Abuse       0.04      0.75      0.07      3324
+Car accident       0.25      0.87      0.39     58103
+
+    accuracy                           0.77   2330384
+   macro avg       0.45      0.80      0.51   2330384
+weighted avg       0.90      0.77      0.81   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1317499   80524   57823   87468   57230   49351  142684]
+ [   2590  103243    2857     937    3192   11915     694]
+ [   1061    6236   21224    5245     112     843    2393]
+ [     70      18    1256   38166    1219       0     813]
+ [   9182    3905     208    6288  251399     400     912]
+ [    365     266       2       0       0    2483     208]
+ [   2833     144    1318    3416       0       0   50392]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 44/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 208.87s
+[INFO] [TRAIN] Average Loss: 0.6740
+[INFO] Epoch training completed in 208.87s | Loss: 0.6740
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 3. 2. 1. 2. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9375
+[INFO]   mAP: 0.9239
+
+[INFO]   F1 Score: 0.8058
+[INFO]   Precision: 0.8970
+[INFO]   Recall: 0.7662
+[INFO]   Accuracy: 0.7662
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.73      0.84   1792579
+    Fighting       0.52      0.84      0.64    125428
+    Shooting       0.24      0.57      0.34     37114
+   Explosion       0.27      0.92      0.42     41542
+        Riot       0.80      0.93      0.86    272294
+       Abuse       0.04      0.69      0.08      3324
+Car accident       0.25      0.87      0.39     58103
+
+    accuracy                           0.77   2330384
+   macro avg       0.45      0.79      0.51   2330384
+weighted avg       0.90      0.77      0.81   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1316019   85405   62142   86192   58501   41959  142361]
+ [   2434  105371    2979    1107    3233    9740     564]
+ [    965    6630   21289    5181      96     656    2297]
+ [    118      50    1240   38070    1267       0     797]
+ [   8537    4406     208    5776  252167     288     912]
+ [    349     458      24       0       0    2285     208]
+ [   2762     160    1366    3530       0       0   50285]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 45/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 255.48s
+[INFO] [TRAIN] Average Loss: 0.6752
+[INFO] Epoch training completed in 255.48s | Loss: 0.6752
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 3. 2. 1. 1. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 3. 0. 3. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9371
+[INFO]   mAP: 0.9231
+
+[INFO]   F1 Score: 0.8045
+[INFO]   Precision: 0.8969
+[INFO]   Recall: 0.7639
+[INFO]   Accuracy: 0.7639
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.73      0.84   1792579
+    Fighting       0.53      0.82      0.64    125428
+    Shooting       0.26      0.54      0.36     37114
+   Explosion       0.28      0.90      0.43     41542
+        Riot       0.79      0.93      0.86    272294
+       Abuse       0.04      0.74      0.07      3324
+Car accident       0.25      0.89      0.39     58103
+
+    accuracy                           0.76   2330384
+   macro avg       0.45      0.79      0.51   2330384
+weighted avg       0.90      0.76      0.80   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1311636   81418   51327   81665   62148   51484  152901]
+ [   2462  102733    2429     905    3572   12440     887]
+ [   1045    6505   20150    5536     176     937    2765]
+ [    182      50    1136   37416    1478       0    1280]
+ [   8432    3412      80    4992  253874     400    1104]
+ [    365     266       2       0       0    2467     224]
+ [   2118     144    1068    2782       0       0   51991]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 46/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 248.36s
+[INFO] [TRAIN] Average Loss: 0.6730
+[INFO] Epoch training completed in 248.38s | Loss: 0.6730
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 3. 2. 1. 1. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9377
+[INFO]   mAP: 0.9234
+
+[INFO]   F1 Score: 0.7991
+[INFO]   Precision: 0.8953
+[INFO]   Recall: 0.7585
+[INFO]   Accuracy: 0.7585
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.72      0.84   1792579
+    Fighting       0.49      0.84      0.62    125428
+    Shooting       0.25      0.56      0.35     37114
+   Explosion       0.27      0.91      0.42     41542
+        Riot       0.79      0.93      0.86    272294
+       Abuse       0.04      0.70      0.07      3324
+Car accident       0.25      0.88      0.39     58103
+
+    accuracy                           0.76   2330384
+   macro avg       0.44      0.79      0.51   2330384
+weighted avg       0.90      0.76      0.80   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1295980   97340   57385   85549   61819   47877  146629]
+ [   1888  105474    2655     953    3357   10390     711]
+ [    949    6640   20959    5147     160     754    2505]
+ [     54      66    1256   37779    1494       0     893]
+ [   8318    3958     112    4784  253970     320     832]
+ [    333     442       2       0       0    2323     224]
+ [   2366     160    1263    3180       0       0   51134]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 47/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 261.41s
+[INFO] [TRAIN] Average Loss: 0.6655
+[INFO] Epoch training completed in 261.41s | Loss: 0.6655
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 3. 2. 1. 1. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9340
+[INFO]   mAP: 0.9228
+
+[INFO]   F1 Score: 0.8061
+[INFO]   Precision: 0.8978
+[INFO]   Recall: 0.7657
+[INFO]   Accuracy: 0.7657
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.74      0.84   1792579
+    Fighting       0.51      0.85      0.64    125428
+    Shooting       0.25      0.55      0.34     37114
+   Explosion       0.28      0.91      0.43     41542
+        Riot       0.82      0.91      0.86    272294
+       Abuse       0.04      0.66      0.08      3324
+Car accident       0.25      0.90      0.39     58103
+
+    accuracy                           0.77   2330384
+   macro avg       0.45      0.79      0.51   2330384
+weighted avg       0.90      0.77      0.81   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1317709   91099   57867   81502   49300   41639  153463]
+ [   2618  106756    2222     889    2678    9441     824]
+ [    997    7220   20392    5216      48     555    2686]
+ [     70      66    1256   37933    1187       0    1030]
+ [  11442    4881     144    7152  247203     304    1168]
+ [    349     538       8       0       0    2189     240]
+ [   1759      96    1215    2796       0       0   52237]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 48/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 265.69s
+[INFO] [TRAIN] Average Loss: 0.6711
+[INFO] Epoch training completed in 265.69s | Loss: 0.6711
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 3. 2. 1. 2. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9362
+[INFO]   mAP: 0.9231
+
+[INFO]   F1 Score: 0.8033
+[INFO]   Precision: 0.8976
+[INFO]   Recall: 0.7622
+[INFO]   Accuracy: 0.7622
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.73      0.84   1792579
+    Fighting       0.52      0.83      0.64    125428
+    Shooting       0.26      0.54      0.35     37114
+   Explosion       0.28      0.91      0.43     41542
+        Riot       0.79      0.93      0.86    272294
+       Abuse       0.04      0.73      0.07      3324
+Car accident       0.24      0.91      0.38     58103
+
+    accuracy                           0.76   2330384
+   macro avg       0.45      0.80      0.51   2330384
+weighted avg       0.90      0.76      0.80   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1306257   83445   51731   80866   60483   50945  158852]
+ [   2428  103904    2313     905    3496   11495     887]
+ [   1029    6827   19867    5627     176     786    2802]
+ [    150      18    1163   37825    1235       0    1151]
+ [   8400    3364     112    5670  253154     432    1162]
+ [    324     330       2       0       0    2438     230]
+ [   1444      96    1020    2691       0       0   52852]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 49/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 256.35s
+[INFO] [TRAIN] Average Loss: 0.6632
+[INFO] Epoch training completed in 256.35s | Loss: 0.6632
+[INFO] Model checkpoint saved
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 3. 2. 1. 1. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9363
+[INFO]   mAP: 0.9225
+
+[INFO]   F1 Score: 0.8009
+[INFO]   Precision: 0.8964
+[INFO]   Recall: 0.7597
+[INFO]   Accuracy: 0.7597
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.73      0.84   1792579
+    Fighting       0.49      0.84      0.62    125428
+    Shooting       0.26      0.54      0.35     37114
+   Explosion       0.28      0.91      0.43     41542
+        Riot       0.81      0.92      0.86    272294
+       Abuse       0.04      0.73      0.07      3324
+Car accident       0.25      0.89      0.39     58103
+
+    accuracy                           0.76   2330384
+   macro avg       0.44      0.79      0.51   2330384
+weighted avg       0.90      0.76      0.80   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1301551   98054   53042   82935   56410   50741  149846]
+ [   1792  105504    2071     873    2920   11478     790]
+ [    997    7150   19987    5440     112     786    2642]
+ [     86      66    1222   37932    1267       0     969]
+ [   9387    4304     128    5520  251563     336    1056]
+ [    333     330       2       0       0    2435     224]
+ [   2222     160    1116    3124       0       0   51481]]
+[INFO] 
+================================================================================
+[INFO] EPOCH 50/50 | Mode: Multi | Weights: Inverse
+[INFO] ================================================================================
+
+[INFO] [TRAIN] Epoch completed in 210.99s
+[INFO] [TRAIN] Average Loss: 0.6550
+[INFO] Epoch training completed in 210.99s | Loss: 0.6550
+[INFO] Predictions shape: (145649,)
+[INFO] Probabilities shape: (145649, 7)
+[INFO] Ground truth shape: 2330384
+[INFO] ground truth sample (first 100): [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]
+[INFO] Sample predictions (first 100): [3. 2. 2. 1. 2. 1. 1. 2. 2. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3.
+ 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2.]
+[INFO] Modality names: ['RGB', 'AUDIO']
+[INFO] Class 0 top modality: AUDIO
+[INFO] Class 1 top modality: AUDIO
+[INFO] Class 2 top modality: RGB
+[INFO] Class 3 top modality: AUDIO
+[INFO] Class 4 top modality: AUDIO
+[INFO] Class 5 top modality: RGB
+[INFO] Class 6 top modality: AUDIO
+[INFO] Per-category modality contribution matrix shape: (7, 2)
+[INFO] Per-category top modality mapping: ['AUDIO', 'AUDIO', 'RGB', 'AUDIO', 'AUDIO', 'RGB', 'AUDIO']
+[INFO] 
+Test Metrics:
+[INFO]   ROC AUC: 0.9374
+[INFO]   mAP: 0.9246
+
+[INFO]   F1 Score: 0.8134
+[INFO]   Precision: 0.8978
+[INFO]   Recall: 0.7762
+[INFO]   Accuracy: 0.7762
+[INFO] 
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.99      0.75      0.85   1792579
+    Fighting       0.53      0.84      0.65    125428
+    Shooting       0.25      0.60      0.35     37114
+   Explosion       0.30      0.90      0.45     41542
+        Riot       0.81      0.92      0.86    272294
+       Abuse       0.05      0.66      0.08      3324
+Car accident       0.26      0.87      0.40     58103
+
+    accuracy                           0.78   2330384
+   macro avg       0.45      0.79      0.52   2330384
+weighted avg       0.90      0.78      0.81   2330384
+
+[INFO] 
+Confusion Matrix:
+[[1338602   83571   62664   73714   54949   36217  142862]
+ [   2709  105549    3159     823    3153    9381     654]
+ [   1077    6031   22421    4423      96     565    2501]
+ [    308      82    1314   37521    1459       0     858]
+ [  10248    3925     300    5014  251847     288     672]
+ [    381     506       8       0       0    2189     240]
+ [   2995     160    1350    2841       0       0   50757]]
+[INFO] 
+================================================================================
+[INFO] Training completed. Saving results...

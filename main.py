@@ -11,6 +11,27 @@ from train import train
 from test import test
 import option
 import logging
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+class FocalLoss(nn.Module):
+    def __init__(self, alpha=None, gamma=2.0):
+        super(FocalLoss, self).__init__()
+        self.alpha = alpha  # class weights
+        self.gamma = gamma
+
+    def forward(self, inputs, targets):
+        ce_loss = F.cross_entropy(inputs, targets, reduction='none')
+        pt = torch.exp(-ce_loss)  # prob of correct class
+
+        focal_loss = (1 - pt) ** self.gamma * ce_loss
+
+        if self.alpha is not None:
+            alpha_t = self.alpha[targets]
+            focal_loss = alpha_t * focal_loss
+
+        return focal_loss.mean()
 
 def setup_logging(log_dir):
 	"""Setup logging with both console and file handlers"""
@@ -68,28 +89,35 @@ if __name__ == '__main__':
 
 	device = torch.device("cuda")
 	logging.info(f'Device: {device}')
+	class_weights = [1.0, 1.1216551065444946, 1.228792428970337, 1.264064073562622, 1.1746114492416382, 6.067634582519531, 1.1627792119979858]
 
 	if args.weights == 'Inverse':
-		logging.info('Calculating inverse class weights...')
-		train_data_all = DataLoader(Dataset(args, test_mode=False), batch_size=args.batch_size, shuffle=True)
-		all_labels = []
+		if(class_weights is not None):
+			class_weights = torch.tensor(class_weights, dtype=torch.float32).to(device)
+			logging.info(f'Using inverse class weights: {class_weights.cpu().numpy()}')
+		else:
+			logging.info('Calculating inverse class weights...')
+			train_data_all = DataLoader(Dataset(args, test_mode=False), batch_size=args.batch_size, shuffle=True)
+			all_labels = []
 
-		for i, (input, label) in enumerate(train_data_all):
-			print(i)
-			all_labels.append(label)
+			for i, (input, label) in enumerate(train_data_all):
+				print(i)
+				all_labels.append(label)
 
-		all_labels = torch.cat(all_labels, dim=0)
-		print(f'DataLoader: {all_labels.shape}')
+			all_labels = torch.cat(all_labels, dim=0)
+			print(f'DataLoader: {all_labels.shape}')
 
-		torch_labels = torch.tensor(all_labels, dtype=torch.int64) 
+			# torch_labels = torch.tensor(all_labels, dtype=torch.int64) 
+			torch_labels = all_labels.clone().detach().to(torch.int64) 
 
-		# Calculate class frequencies
-		class_counts = torch.bincount(torch_labels)
-		# Calculate inverse class frequencies
-		class_weights = 1.0 / class_counts
-		# Normalize weights
-		class_weights /= class_weights.sum()
-		logging.info(f'Class weights: {class_weights.tolist()}')
+			# Calculate class frequencies
+			class_counts = torch.bincount(torch_labels)
+			# Calculate inverse class frequencies
+			beta = 0.999
+			effective_num = 1.0 - torch.pow(beta, class_counts.float())
+			class_weights = (1.0 - beta) / effective_num
+			class_weights = class_weights / class_weights.min()
+			logging.info(f'Class weights: {class_weights.tolist()}')
 	
 
 	train_loader = DataLoader(Dataset(args, test_mode=False),
@@ -127,24 +155,29 @@ if __name__ == '__main__':
 
 	scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[10], gamma=0.1)
 
-	class WeightedCrossEntropyLoss(torch.nn.Module):
-		def __init__(self):
-			super(WeightedCrossEntropyLoss, self).__init__()
+	# class WeightedCrossEntropyLoss(torch.nn.Module):
+	# 	def __init__(self):
+	# 		super(WeightedCrossEntropyLoss, self).__init__()
 
-		def forward(self, input, target, sample_weights):
-			ce_loss = torch.nn.CrossEntropyLoss(reduction='none')(input, target)
-			weighted_ce_loss = ce_loss * sample_weights
-			return torch.mean(weighted_ce_loss)
+	# 	def forward(self, input, target, sample_weights):
+	# 		ce_loss = torch.nn.CrossEntropyLoss(reduction='none')(input, target)
+	# 		weighted_ce_loss = ce_loss * sample_weights
+	# 		return torch.mean(weighted_ce_loss)
+
+	
 
 	if args.weights == 'Inverse':
-		criterion = WeightedCrossEntropyLoss()
+		# criterion = WeightedCrossEntropyLoss()
+		# criterion = torch.nn.CrossEntropyLoss(weight=class_weights.to(device))
+		criterion = FocalLoss(alpha=class_weights.to(device), gamma=1.5)
 		logging.info('Using weighted cross-entropy loss')
 	elif args.weights == 'Normal':
-		criterion = torch.nn.CrossEntropyLoss()
+		# criterion = torch.nn.CrossEntropyLoss()
+		criterion = FocalLoss(alpha=None, gamma=1.5)
 		logging.info('Using standard cross-entropy loss')
 	criterion2 = torch.nn.BCEWithLogitsLoss()
 
-	is_topk = True
+	is_topk = False
 	gt = np.load(args.gt)
 	logging.info(f'Ground truth loaded: {gt.shape}')
 

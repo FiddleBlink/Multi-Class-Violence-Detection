@@ -74,7 +74,24 @@ def test(dataloader, model, device, gt, modality='MIX2', feature_size=None):
 				try:
 					input = input.to(device)
 					full_probs_batch, drops_batch = compute_modality_drops(model, input, seq_len=None, modality_slices=modality_slices)
-					batch_preds = np.argmax(full_probs_batch, axis=1).astype(np.float32)
+					
+					# Per-class thresholds (tune these later)
+					thresholds = np.array([0.5, 0.6, 0.7, 0.65, 0.5, 0.95, 0.65])
+
+					batch_preds = []
+
+					for probs in full_probs_batch:
+						valid_classes = np.where(probs > thresholds)[0]
+
+						if len(valid_classes) > 0:
+							pred = valid_classes[np.argmax(probs[valid_classes])]
+						else:
+							pred = np.argmax(probs)
+
+						batch_preds.append(pred)
+
+					batch_preds = np.array(batch_preds).astype(np.float32)
+					
 					all_preds.append(batch_preds)
 					all_probs.append(full_probs_batch)
 

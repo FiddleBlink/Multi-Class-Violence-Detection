@@ -5,7 +5,7 @@ from tqdm import tqdm
 from torch.cuda.amp import autocast, GradScaler
 
 
-def CLAS(logits, label, seq_len, criterion, device, sample_weights=None, is_topk=True):
+def CLAS(logits, label, seq_len, criterion, device, is_topk=True):
     logits = logits.squeeze()
     outx = []
     for i in range(logits.shape[0]):
@@ -19,10 +19,7 @@ def CLAS(logits, label, seq_len, criterion, device, sample_weights=None, is_topk
 
     instance_logits = torch.stack(outx)
 
-    if sample_weights is None:
-        clsloss = criterion(instance_logits, label)
-    else:
-        clsloss = criterion(instance_logits, label, sample_weights)
+    clsloss = criterion(instance_logits, label)
 
     return clsloss
 
@@ -50,7 +47,7 @@ def CLAS2(logits, label, seq_len, criterion, device, is_topk=True):
     return clsloss
 
 
-def CENTROPY(logits, logits2, seq_len, device, scoring_mode, sample_weights=None):
+def CENTROPY(logits, logits2, seq_len, device, scoring_mode):
     instance_logits = 0.0
 
     if scoring_mode == 'Binary':
@@ -63,10 +60,7 @@ def CENTROPY(logits, logits2, seq_len, device, scoring_mode, sample_weights=None
 
             crosOut = -torch.mean(tmp1.detach() * torch.log(tmp2 + 1e-8))
 
-            if sample_weights is not None:
-                instance_logits += crosOut * sample_weights[i]
-            else:
-                instance_logits += crosOut
+            instance_logits += crosOut
 
     elif scoring_mode == 'Multi':
         for i in range(logits.shape[0]):
@@ -78,10 +72,7 @@ def CENTROPY(logits, logits2, seq_len, device, scoring_mode, sample_weights=None
 
             crosOut = -torch.mean(tmp1.detach() * torch.log(tmp2 + 1e-8))
 
-            if sample_weights is not None:
-                instance_logits += crosOut * sample_weights[i]
-            else:
-                instance_logits += crosOut
+            instance_logits += crosOut
 
     instance_logits = instance_logits / logits.shape[0]
 
@@ -103,6 +94,9 @@ def train(dataloader, model, optimizer, criterion, criterion2, device,
 
     start_time = time.time()
 
+    # if class_weights is not None:
+    #     class_weights = class_weights.to(device)
+
     for i, (input, label) in enumerate(pbar):
         try:
             seq_len = torch.sum(torch.max(torch.abs(input), dim=2)[0] > 0, 1)
@@ -111,11 +105,10 @@ def train(dataloader, model, optimizer, criterion, criterion2, device,
             input = input.float().to(device)
             label = label.to(torch.int64).to(device)
 
-            if class_weights is not None:
-                class_weights = class_weights.to(device)
-                sample_weights = class_weights[label]
-            else:
-                sample_weights = None
+            # if class_weights is not None:
+            #     sample_weights = class_weights[label]
+            # else:
+            #     sample_weights = None
 
             optimizer.zero_grad()
 
@@ -124,7 +117,7 @@ def train(dataloader, model, optimizer, criterion, criterion2, device,
                 logits, logits2 = model(input, seq_len)
 
                 clsloss = CLAS(logits, label, seq_len, criterion,
-                               device, sample_weights, is_topk)
+                                device, is_topk)
 
                 if scoring_mode == 'Binary':
                     label2 = torch.where(label >= 1,
@@ -135,12 +128,11 @@ def train(dataloader, model, optimizer, criterion, criterion2, device,
 
                 elif scoring_mode == 'Multi':
                     clsloss2 = CLAS(logits2, label, seq_len,
-                                    criterion, device, sample_weights, is_topk)
+                                    criterion, device, is_topk)
 
-                croloss = CENTROPY(logits, logits2, seq_len,
-                                   device, scoring_mode, sample_weights)
+                croloss = CENTROPY(logits, logits2, seq_len, device, scoring_mode)
 
-                total_loss = clsloss + clsloss2 + 5 * croloss
+                total_loss = clsloss + clsloss2 + 1 * croloss
 
             # 🔥 AMP backward
             scaler.scale(total_loss).backward()
