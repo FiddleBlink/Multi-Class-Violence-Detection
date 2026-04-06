@@ -20,6 +20,13 @@ MODALITY_FEATURE_SIZES = {
     'MIX_ALL': 1024 + 1024 + 128  # RGB + FLOW + AUDIO
 }
 
+def collate_fn(batch):
+    if isinstance(batch[0], tuple):
+        features, paths = zip(*batch)
+        return list(features), list(paths)
+    else:
+        return list(batch)
+
 LABEL_NAMES = {
     0: 'Normal',
     1: 'Fighting',
@@ -139,6 +146,10 @@ def run_analysis():
     selected_modality = script_args.modality
     print(f"Using modality: {selected_modality} with model feature size: {args.feature_size}")
     
+    # Set batch size based on modality (crops vs single feature)
+    batch_size = 5 if selected_modality in ['RGB', 'MIX2'] else 1
+    print(f"Using batch size: {batch_size}")
+    
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     # Constants for temporal processing
@@ -147,8 +158,8 @@ def run_analysis():
     min_duration_clean = 3.0  # 3 seconds threshold for cleaned predictions
 
     test_dataset = Dataset(args, test_mode=True, return_path=True)
-    test_loader = DataLoader(test_dataset, batch_size=5, shuffle=False,
-                              num_workers=args.workers, pin_memory=True)
+    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False,
+                              num_workers=args.workers, pin_memory=True, collate_fn=collate_fn)
 
     model = Model(args).to(device)
     checkpoint = torch.load(r'ckpt\wsanodet_New_MIX2_v1.3_\wsanodet_New_MIX2_v1.3_.pkl', map_location=device)
@@ -168,22 +179,51 @@ def run_analysis():
 
     with torch.no_grad():
         for batch_idx, batch in enumerate(test_loader):
-            batch_inputs, batch_paths = batch
-            batch_inputs = batch_inputs.to(device)
-            batch_inputs = pad_features_to_full(batch_inputs, selected_modality)
+            if batch_size == 1:
+                batch_inputs, batch_paths = batch
+            else:
+                batch_inputs, batch_paths = batch
             batch_paths = [p.strip() for p in batch_paths]
             clip_name = extract_clip_key(batch_paths[0])
 
-            # Ensure all 5 crops belong to the same clip
-            if not all(extract_clip_key(p) == clip_name for p in batch_paths):
-                raise ValueError(f'Batch {batch_idx} contains mixed clips: {batch_paths[:5]}')
+            # Convert numpy arrays to tensors
+            batch_inputs = [torch.from_numpy(inp) if isinstance(inp, np.ndarray) else inp for inp in batch_inputs]
 
-            full_probs, drops = compute_modality_drops(model, batch_inputs, seq_len=None, modality_slices=modality_slices)
-            full_probs = np.asarray(full_probs)
+            # For batch_size=1, no need to check mixed clips
+            if batch_size > 1:
+                # Ensure all crops belong to the same clip
+                if not all(extract_clip_key(p) == clip_name for p in batch_paths):
+                    raise ValueError(f'Batch {batch_idx} contains mixed clips: {batch_paths[:5]}')
+
+            # Pad batch to max length in batch
+            max_len = max(inp.shape[0] for inp in batch_inputs)
+            padded_batch = []
+            for inp in batch_inputs:
+                if inp.shape[0] < max_len:
+                    pad = torch.zeros((max_len - inp.shape[0], inp.shape[1]), dtype=inp.dtype, device=inp.device)
+                    padded = torch.cat((inp, pad), dim=0)
+                else:
+                    padded = inp
+                padded_batch.append(padded)
+            batch_inputs = torch.stack(padded_batch, dim=0).to(device)
+            batch_inputs = pad_features_to_full(batch_inputs, selected_modality)
+
+            seq_len = [batch_inputs.size(1)] * batch_inputs.size(0)
+            if selected_modality == 'MIX2':
+                full_probs, drops = compute_modality_drops(model, batch_inputs, seq_len=seq_len, modality_slices=modality_slices)
+            else:
+                model_output, _ = model(batch_inputs, seq_len=seq_len)
+                full_probs = torch.softmax(model_output, dim=2).mean(dim=0).cpu().numpy()
+                drops = None
+
             frame_preds = np.argmax(full_probs, axis=1)
             frame_entropy = entropy(full_probs)
 
-            frame_modalities, frame_modality_values = score_modality_dominance(frame_preds, drops, modality_names)
+            if selected_modality == 'MIX2':
+                frame_modalities, frame_modality_values = score_modality_dominance(frame_preds, drops, modality_names)
+            else:
+                frame_modalities = [modality_names[0]] * len(frame_preds)
+                frame_modality_values = [{modality_names[0]: 1.0} for _ in range(len(frame_preds))]
 
             overall_modality_mean = {
                 name: float(np.mean([frame_modality_values[i][name] for i in range(len(frame_preds))]))
@@ -215,7 +255,7 @@ def run_analysis():
             analysis_results.append({
                 'clip_name': clip_name,
                 'batch_index': batch_idx,
-                'num_frames': int(len(frame_preds)),
+                'num_frames': int(len(frame_preds) * 16),
                 'duration_seconds': round(len(frame_preds) * 16 / 24, 2),
                 'predicted_classes': label_distribution,
                 'cleaned_predicted_classes': cleaned_label_distribution,
