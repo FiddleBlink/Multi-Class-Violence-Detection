@@ -4,7 +4,7 @@ import numpy as np
 from utils import process_feat
 
 class Dataset(data.Dataset):
-    def __init__(self, args, transform=None, test_mode=False):
+    def __init__(self, args, transform=None, test_mode=False, return_path=False):
         self.modality = args.modality
 
         if test_mode:
@@ -18,6 +18,7 @@ class Dataset(data.Dataset):
         self.max_seqlen = args.max_seqlen
         self.tranform = transform
         self.test_mode = test_mode
+        self.return_path = return_path
         self.normal_flag = '_label_A'
         self._parse_list()
 
@@ -105,6 +106,8 @@ class Dataset(data.Dataset):
             features = self.tranform(features)
         
         if self.test_mode:
+            if self.return_path:
+                return features, self.list[index].strip()
             return features
         else:
             features = process_feat(features, self.max_seqlen, is_random=False)
