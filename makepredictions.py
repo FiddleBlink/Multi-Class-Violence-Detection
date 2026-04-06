@@ -47,7 +47,7 @@ def extract_clip_key(path):
     return base
 
 
-def segment_predictions(preds, block_size=16, fps=24, min_duration=0.1):
+def segment_predictions(preds, block_size=16, fps=24, min_duration=0.1, frame_modalities=None):
     segments = []
     if len(preds) == 0:
         return segments
@@ -61,13 +61,18 @@ def segment_predictions(preds, block_size=16, fps=24, min_duration=0.1):
             start_time = round(start_idx * block_size / fps, 2)
             end_time = round((end_idx + 1) * block_size / fps, 2)
             if end_time - start_time >= min_duration:
-                segments.append({
+                segment = {
                     'label_id': current_label,
                     'label_name': LABEL_NAMES.get(current_label, 'Unknown'),
                     'start_time': start_time,
                     'end_time': end_time,
                     'duration': round(end_time - start_time, 2)
-                })
+                }
+                if frame_modalities is not None:
+                    segment_modalities = frame_modalities[start_idx:end_idx+1]
+                    dominant_modality = max(set(segment_modalities), key=segment_modalities.count)
+                    segment['dominant_modality'] = dominant_modality
+                segments.append(segment)
             current_label = int(preds[idx])
             start_idx = idx
 
@@ -75,13 +80,18 @@ def segment_predictions(preds, block_size=16, fps=24, min_duration=0.1):
     start_time = round(start_idx * block_size / fps, 2)
     end_time = round((end_idx + 1) * block_size / fps, 2)
     if end_time - start_time >= min_duration:
-        segments.append({
+        segment = {
             'label_id': current_label,
             'label_name': LABEL_NAMES.get(current_label, 'Unknown'),
             'start_time': start_time,
             'end_time': end_time,
             'duration': round(end_time - start_time, 2)
-        })
+        }
+        if frame_modalities is not None:
+            segment_modalities = frame_modalities[start_idx:end_idx+1]
+            dominant_modality = max(set(segment_modalities), key=segment_modalities.count)
+            segment['dominant_modality'] = dominant_modality
+        segments.append(segment)
 
     return segments
 
@@ -234,8 +244,8 @@ def run_analysis():
             modality_frame_count = {name: int(frame_modalities.count(name)) for name in modality_names}
             modality_frame_share = {name: round(modality_frame_count[name] / len(frame_preds), 3) for name in modality_names}
 
-            predicted_segments = segment_predictions(frame_preds, block_size=block_size, fps=fps)
-            cleaned_segments = segment_predictions(frame_preds, block_size=block_size, fps=fps, min_duration=min_duration_clean)
+            predicted_segments = segment_predictions(frame_preds, block_size=block_size, fps=fps, frame_modalities=frame_modalities)
+            cleaned_segments = segment_predictions(frame_preds, block_size=block_size, fps=fps, min_duration=min_duration_clean, frame_modalities=frame_modalities)
             
             # Create mask for frames in cleaned segments (>= 3 seconds)
             cleaned_frame_mask = np.zeros(len(frame_preds), dtype=bool)
